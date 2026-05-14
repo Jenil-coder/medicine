@@ -8,52 +8,63 @@ import './Applications.css';
 const Applications = () => {
   return (
     <section className="applications-section" id="applications">
-      <div className="app-layout">
+      <div className="app-inner">
 
-        {/* Left Typography */}
-        <motion.div
-          className="app-left"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <span className="app-kicker">Our Applications</span>
-          <h2 className="app-headline">Solutions for every scientific challenge.</h2>
-          <p className="app-desc">From clinical diagnostics and life sciences research to food safety testing, pharmaceutical development, and forensic analysis — we deliver end-to-end laboratory solutions across critical industry verticals.</p>
+        {/* Header row */}
+        <div className="app-header-row">
+          <motion.div
+            className="app-header-left"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <span className="app-kicker">Our Applications</span>
+            <h2 className="app-headline">Solutions for every scientific challenge.</h2>
+          </motion.div>
 
-          <Link to="/applications" className="app-explore-btn">
-            <span>Explore All Applications</span>
-            <ArrowRight size={18} />
-          </Link>
-        </motion.div>
+          <motion.div
+            className="app-header-right"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <p className="app-desc">
+              From molecular diagnostics and cell biology to forensic science, lab automation, and turnkey lab design — we deliver end-to-end solutions across every laboratory discipline.
+            </p>
+            <Link to="/applications" className="app-explore-btn">
+              <span>Explore All Applications</span>
+              <ArrowRight size={18} />
+            </Link>
+          </motion.div>
+        </div>
 
-        {/* Right: Application Cards */}
-        <div className="app-cards-column">
+        {/* Grid of 15 application cards */}
+        <div className="app-grid">
           {applicationsData.map((item, i) => {
             const Icon = item.icon;
             return (
               <motion.div
                 key={item.id}
-                initial={{ opacity: 0, x: 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.55, delay: (i % 5) * 0.07, ease: [0.16, 1, 0.3, 1] }}
               >
-                <Link to={`/applications/${item.id}`} className="app-area-card">
-                  <img src={item.image} alt={item.title} className="app-area-card-img" />
-                  <div className="app-area-card-overlay" />
-                  <div className="app-area-card-body">
-                    <div className="app-area-card-badge" style={{ background: item.color }}>
-                      <Icon size={14} />
-                      <span>{item.shortTitle}</span>
+                <Link to={`/applications/${item.id}`} className="app-grid-card">
+                  <div className="app-grid-card-img-wrap">
+                    <img src={item.image} alt={item.title} className="app-grid-card-img" />
+                    <div className="app-grid-card-overlay" style={{ background: `linear-gradient(to top, ${item.color}cc 0%, ${item.color}22 55%, transparent 100%)` }} />
+                  </div>
+                  <div className="app-grid-card-body">
+                    <div className="app-grid-card-icon" style={{ background: `${item.color}20`, color: item.color }}>
+                      <Icon size={18} />
                     </div>
-                    <div className="app-area-card-info">
-                      <h3>{item.title}</h3>
-                      <span className="app-area-card-cta">
-                        Explore <ArrowRight size={14} />
-                      </span>
-                    </div>
+                    <h3 className="app-grid-card-title">{item.title}</h3>
+                    <span className="app-grid-card-arrow" style={{ color: item.color }}>
+                      <ArrowRight size={15} />
+                    </span>
                   </div>
                 </Link>
               </motion.div>
