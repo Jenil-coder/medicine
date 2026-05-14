@@ -492,21 +492,6 @@ const ApplicationDetailPage = () => {
                       })}
                     </div>
 
-                    {/* General enquiry CTA */}
-                    <div className="adp-qbb-enquiry-strip">
-                      <button
-                        className="adp-qbb-enquiry-btn"
-                        onClick={() => setEnquiryProduct({
-                          product: selectedWorkflow.title,
-                          application: selectedWorkflow.appCategory,
-                          accentColor: selectedWorkflow.appColor
-                        })}
-                      >
-                        <MessageSquare size={14} />
-                        Ask About This Application
-                      </button>
-                    </div>
-
                     {quoteCart.length > 0 && (
                       <button
                         className="adp-qbb-view-quote-btn"
@@ -518,6 +503,16 @@ const ApplicationDetailPage = () => {
                       </button>
                     )}
                   </div>
+
+                  {/* Ask About This Product — simple mailto, no popup */}
+                  <a
+                    href={`mailto:info@inventasystems.in?subject=Product%20Enquiry%3A%20${encodeURIComponent(selectedWorkflow.title)}%20%E2%80%94%20${encodeURIComponent(selectedWorkflow.appCategory)}&body=Hello%2C%0A%0AI%20would%20like%20to%20enquire%20about%20the%20${encodeURIComponent(selectedWorkflow.title)}%20solutions%20for%20${encodeURIComponent(selectedWorkflow.appCategory)}.%0A%0APlease%20provide%20more%20information%20on%20pricing%2C%20availability%2C%20and%20technical%20specifications.%0A%0AThank%20you.`}
+                    className="adp-ask-product-link"
+                    style={{ borderColor: `${selectedWorkflow.appColor}35`, color: selectedWorkflow.appColor }}
+                  >
+                    <MessageSquare size={15} />
+                    Ask About This Product
+                  </a>
 
                   <div className="adp-cta-box" style={{ background: `${selectedWorkflow.appColor}08`, borderColor: `${selectedWorkflow.appColor}20` }}>
                     <h4>Technical Support</h4>
