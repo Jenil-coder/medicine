@@ -318,13 +318,16 @@ const ApplicationDetailPage = () => {
         <div className="adp-hero-overlay" />
         <div className="adp-hero-color-wash" style={{ background: app.color }} />
         <div className="adp-hero-inner">
-          <Link to="/applications" className="adp-back-btn">
-            <ArrowLeft size={16} />
-            All Applications
-          </Link>
-          <div className="adp-hero-badge" style={{ background: `${app.color}30`, borderColor: `${app.color}60` }}>
-            <AppIcon size={16} style={{ color: app.color }} />
-            <span style={{ color: app.color }}>{app.shortTitle}</span>
+          <div className="adp-breadcrumb">
+            <Link to="/applications" className="adp-back-btn">
+              <ArrowLeft size={14} />
+              All Applications
+            </Link>
+            <span className="adp-breadcrumb-sep">/</span>
+            <span className="adp-breadcrumb-current" style={{ color: app.color }}>
+              <AppIcon size={13} />
+              {app.shortTitle}
+            </span>
           </div>
           <h1>{app.title}</h1>
           <p>{app.overview}</p>
@@ -487,6 +490,21 @@ const ApplicationDetailPage = () => {
                           </div>
                         );
                       })}
+                    </div>
+
+                    {/* General enquiry CTA */}
+                    <div className="adp-qbb-enquiry-strip">
+                      <button
+                        className="adp-qbb-enquiry-btn"
+                        onClick={() => setEnquiryProduct({
+                          product: selectedWorkflow.title,
+                          application: selectedWorkflow.appCategory,
+                          accentColor: selectedWorkflow.appColor
+                        })}
+                      >
+                        <MessageSquare size={14} />
+                        Ask About This Application
+                      </button>
                     </div>
 
                     {quoteCart.length > 0 && (

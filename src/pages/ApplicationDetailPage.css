@@ -53,36 +53,53 @@
   color: #fff;
 }
 
+/* ── Breadcrumb ── */
+.adp-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+  background: rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 100px;
+  padding: 7px 16px 7px 12px;
+}
+
 .adp-back-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  color: rgba(255,255,255,0.7);
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 500;
-  margin-bottom: 28px;
   transition: color 0.2s ease;
   letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 .adp-back-btn:hover {
   color: #fff;
 }
 
-.adp-hero-badge {
+.adp-breadcrumb-sep {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.adp-breadcrumb-current {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border-radius: 100px;
-  border: 1px solid;
-  backdrop-filter: blur(8px);
+  gap: 5px;
   font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  white-space: nowrap;
 }
 
 .adp-hero-inner h1 {
@@ -638,6 +655,38 @@
 }
 
 .adp-qbb-view-quote-btn:hover { opacity: 0.7; }
+
+/* ── General Enquiry Strip ── */
+.adp-qbb-enquiry-strip {
+  padding: 10px 12px 4px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  margin-top: 2px;
+}
+
+.adp-qbb-enquiry-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  padding: 11px 14px;
+  background: #f8f8f8;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: #444;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.01em;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.adp-qbb-enquiry-btn:hover {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
 
 .adp-cta-box {
   border: 1px solid;
