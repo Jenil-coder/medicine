@@ -1,0 +1,467 @@
+/* =============================================
+   DYNAMIC SPLIT-PANE MEGA MENU CSS
+   Normal to Pill Morph + Left Links / Right Image
+   ============================================= */
+
+/* ── Global Dim Overlay ── */
+.global-dim-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 998;
+  pointer-events: auto;
+}
+
+/* ── Header Wrapper (Layout Morphing) ── */
+.nav-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  transition: padding 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.nav-header.is-hidden {
+  transform: translateY(-120%);
+}
+
+/* 1. Normal State */
+.nav-header.is-normal {
+  padding: 0;
+}
+
+.nav-header.is-normal .nav-bar-container {
+  width: 100%;
+  max-width: 1600px;
+  height: 80px;
+  background: transparent;
+  border-radius: 0;
+  border: none;
+  padding: 0 40px;
+  color: var(--text-main);
+}
+
+/* 2. Pill State */
+.nav-header.is-pill {
+  padding: 24px 20px 0;
+}
+
+.nav-header.is-pill .nav-bar-container {
+  width: min(1100px, 95vw);
+  height: 56px;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  border-radius: 999px;
+  border: 1px solid rgba(93, 174, 123, 0.3);
+  padding: 0 8px 0 20px;
+  color: var(--text-main);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* The actual bar element */
+.nav-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  pointer-events: auto;
+  box-sizing: border-box;
+  transition: 
+    width 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    padding 0.5s ease,
+    background 0.4s ease,
+    border-radius 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.4s ease;
+}
+
+/* ── Logo ── */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.04em;
+  font-family: var(--font-heading);
+}
+
+.logo-dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.nav-logo:hover .logo-dot {
+  transform: scale(1.4);
+}
+
+/* ── Links Cluster ── */
+.nav-links {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+.nav-link-wrapper {
+  cursor: pointer;
+  padding: 6px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+  font-size: 0.88rem;
+  padding: 6px 14px;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+.nav-header.is-normal .nav-link {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.nav-header.is-normal .nav-link:hover,
+.nav-header.is-normal .nav-link.active {
+  color: #000;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.nav-header.is-pill .nav-link {
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.nav-header.is-pill .nav-link:hover,
+.nav-header.is-pill .nav-link.active {
+  color: #000;
+  background: rgba(93, 174, 123, 0.12);
+}
+
+.nav-chevron {
+  display: flex;
+  margin-top: 1px;
+}
+
+/* ── CTA Button ── */
+.nav-actions {
+  display: flex;
+  align-items: center;
+}
+
+.cta-btn {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 10px 24px;
+  border-radius: 999px;
+  transition: all 0.3s ease;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.nav-header.is-normal .cta-btn {
+  background: #000;
+  color: #fff;
+}
+
+.nav-header.is-normal .cta-btn:hover {
+  background: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.nav-header.is-pill .cta-btn {
+  background: #5DAE7B;
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(93, 174, 123, 0.3);
+}
+
+.nav-header.is-pill .cta-btn:hover {
+  background: #4A9A68;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(93, 174, 123, 0.4);
+}
+
+.mobile-trigger {
+  display: none;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* =============================================
+   THE SPLIT-PANE MEGA MENU
+   Left = Links, Right = Images
+   ============================================= */
+.dynamic-mega-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 480px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(32px);
+  border-radius: 24px;
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.1);
+  overflow: hidden;
+  color: #000;
+  z-index: 1010;
+}
+
+/* Even in pill mode (dark UI context), let's keep the menu elegant and bright 
+   for image contrast, or we can make it dark. Let's make it adapt */
+.nav-header.is-pill .dynamic-mega-menu {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(93, 174, 123, 0.2);
+  color: #000;
+}
+
+.mega-menu-inner {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Left Pane (Links) ── */
+.mega-left-pane {
+  flex: 0 0 45%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 480px;
+}
+
+.mega-pane-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.5;
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+
+.mega-sub-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.mega-sub-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  position: relative;
+}
+
+.nav-header.is-normal .mega-sub-item:hover,
+.nav-header.is-normal .mega-sub-item.active {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.nav-header.is-pill .mega-sub-item:hover,
+.nav-header.is-pill .mega-sub-item.active {
+  background: rgba(93, 174, 123, 0.08);
+}
+
+.sub-item-icon {
+  margin-top: 2px;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.mega-sub-item.active .sub-item-icon {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.sub-item-text {
+  flex: 1;
+}
+
+.sub-title {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+}
+
+.sub-desc {
+  font-size: 0.8rem;
+  line-height: 1.35;
+  opacity: 0.6;
+  margin: 0;
+}
+
+.sub-arrow {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding-top: 4px;
+}
+
+/* ── Explore More Link ── */
+.mega-explore-more {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  border-radius: 10px;
+  transition: all 0.25s ease;
+  letter-spacing: -0.01em;
+}
+
+.mega-explore-more:hover {
+  background: rgba(93, 174, 123, 0.08);
+  gap: 12px;
+}
+
+.mega-explore-more svg {
+  transition: transform 0.25s ease;
+}
+
+.mega-explore-more:hover svg {
+  transform: translateX(4px);
+}
+
+.nav-header.is-pill .mega-explore-more {
+  border-top-color: rgba(93, 174, 123, 0.15);
+}
+
+/* ── Right Pane (Photos) ── */
+.mega-right-pane {
+  flex: 1;
+  padding: 12px;
+}
+
+.mega-image-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  background: #eee;
+}
+
+.nav-header.is-pill .mega-image-container {
+  background: #eee;
+}
+
+.mega-photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform, opacity;
+}
+
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 40%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.image-caption {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  z-index: 20;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* ── Mobile Menu ── */
+.mobile-full-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: #111;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.mobile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobile-close {
+  background: none;
+  border: none;
+  color: #fff;
+  padding: 8px;
+}
+
+.mobile-links-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 20vh;
+}
+
+.mobile-link {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .nav-header.is-pill .nav-bar-container {
+    width: calc(100% - 32px);
+  }
+  .nav-links, .cta-btn {
+    display: none;
+  }
+  .mobile-trigger {
+    display: block;
+  }
+}
+
+/* ── Hide nav when app modal is open (home page) ── */
+body.app-modal-active .nav-header {
+  display: none;
+}

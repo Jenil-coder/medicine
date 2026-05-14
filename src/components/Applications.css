@@ -1,0 +1,237 @@
+/* =============================================
+   APPLICATIONS SECTION: BUNDLE POP-OUT GALLERY
+   ============================================= */
+
+/* ── Base Section ── */
+.applications-section {
+  position: relative;
+  width: 100%;
+  padding: 120px 5%;
+  background-color: var(--bg-main);
+  z-index: 50;
+}
+
+.app-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ── Left Typography ── */
+.app-left {
+  flex: 0.8;
+  max-width: 500px;
+}
+
+.app-kicker {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.app-kicker::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.app-headline {
+  font-size: var(--size-step-3);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text-main);
+  margin: 0 0 24px 0;
+  line-height: 1.1;
+}
+
+.app-desc {
+  font-size: var(--size-step-0);
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+  font-weight: 400;
+}
+
+.app-explore-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--text-main);
+  color: var(--bg-main);
+  border: none;
+  border-radius: 100px;
+  padding: 16px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.app-explore-btn:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(93, 174, 123, 0.25);
+}
+
+/* ── Right: Application Cards Column ── */
+.app-cards-column {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 560px;
+}
+
+.app-area-card {
+  position: relative;
+  display: block;
+  height: 170px;
+  border-radius: 20px;
+  overflow: hidden;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+}
+
+.app-area-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.14);
+}
+
+.app-area-card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.app-area-card:hover .app-area-card-img {
+  transform: scale(1.06);
+}
+
+.app-area-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0.1) 100%);
+}
+
+.app-area-card-body {
+  position: absolute;
+  inset: 0;
+  padding: 22px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+}
+
+.app-area-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px 5px 8px;
+  border-radius: 100px;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.app-area-card-info {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.app-area-card-info h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  max-width: 260px;
+}
+
+.app-area-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 100px;
+  padding: 7px 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  transition: background 0.25s ease;
+}
+
+.app-area-card:hover .app-area-card-cta {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  .app-layout {
+    flex-direction: column;
+    text-align: center;
+    gap: 60px;
+  }
+
+  .app-left {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .app-kicker {
+    justify-content: center;
+  }
+
+  .app-right {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .app-bundle-container {
+    width: 100%;
+    max-width: 320px;
+    height: 480px;
+  }
+
+  .app-bundle-text h3 {
+    font-size: 1.5rem;
+  }
+
+  .app-modal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .app-modal-header h2 {
+    font-size: 1.8rem;
+  }
+}

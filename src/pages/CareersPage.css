@@ -1,0 +1,101 @@
+/* CareersPage.css */
+
+.careers-page {
+  background: var(--bg-primary);
+  min-height: 100vh;
+  padding-top: var(--nav-height);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+}
+
+.careers-hero {
+  padding: 8vh 5%;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.careers-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+
+.careers-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.culture-section {
+  padding: 4vh 5% 10vh 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.perks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 8vh;
+}
+
+.perk-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+}
+
+.perk-card h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.perk-card p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.open-roles {
+  background: #111;
+  color: #fff;
+  border-radius: 32px;
+  padding: 60px 5%;
+  text-align: center;
+}
+
+.roles-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.roles-desc {
+  font-size: 1.1rem;
+  color: #aaa;
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+  line-height: 1.6;
+}
+
+.apply-cta {
+  display: inline-flex;
+  background: var(--accent);
+  color: #fff;
+  padding: 16px 32px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: background 0.3s;
+}
+
+.apply-cta:hover {
+  background: #fff;
+  color: #000;
+}

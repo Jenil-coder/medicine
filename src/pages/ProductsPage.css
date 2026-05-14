@@ -1,0 +1,222 @@
+/* ProductsPage.css */
+
+.products-page {
+  background: #f8f9fa; /* Clean light layout for perfect shopping readability */
+  min-height: 100vh;
+  padding-top: var(--nav-height);
+  color: #111;
+  font-family: var(--font-body);
+}
+
+/* Hero Section for Products */
+.products-hero {
+  text-align: center;
+  padding: 8vh 5% 0 5%;
+  background: transparent;
+}
+
+.products-hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  color: #111;
+}
+
+.products-hero-subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  color: #555;
+  max-width: 600px;
+  line-height: 1.6;
+  margin: 0 auto;
+}
+
+/* Category Filters */
+.products-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 3rem 5%;
+}
+
+.filter-btn {
+  background: white;
+  border: 1px solid #e0e0e0;
+  color: #555;
+  padding: 10px 24px;
+  border-radius: 40px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.filter-btn:hover {
+  background: #f0f0f0;
+  color: #111;
+}
+
+.filter-btn.active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+/* Products Grid */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 40px;
+  padding: 0 5% 10vh 5%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Unique 3D / Hover Product Card */
+.product-card {
+  position: relative;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+  /* The card has perspective for the 3D effect applied via framer-motion in JSX */
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.4s ease;
+  height: 440px;
+  /* Fix WebKit bug where border-radius is lost during transform */
+  transform: translateZ(0); 
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: radial-gradient(white, black);
+}
+
+.product-card:hover {
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+/* Image Container */
+.pc-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 70%;
+  background: #f4f4f4;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.product-card:hover .pc-image-wrapper {
+  height: 35%;
+}
+
+.pc-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.product-card:hover .pc-img {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+
+
+/* Card Content Area */
+.pc-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  height: 30%;
+  transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  position: relative;
+  background: #fff;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.product-card:hover .pc-content {
+  height: 65%;
+  overflow: visible;
+}
+
+.pc-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 8px 0;
+}
+
+.pc-desc {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Hidden Reveal Details */
+.pc-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover .pc-reveal {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.1s;
+}
+
+.pc-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+  opacity: 0.8;
+}
+
+.pc-features li {
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pc-features li::before {
+  content: "•";
+  color: var(--accent);
+}
+
+.pc-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.3s;
+}
+
+.pc-cta:hover {
+  background: #000;
+}
+
+/* Animation Container for AnimatePresence grid items */
+.grid-item-container {
+  perspective: 1000px;
+}

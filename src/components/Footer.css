@@ -1,0 +1,361 @@
+/* =============================================
+   CREATIVE FOOTER: "THE LAB CONSOLE"
+   ============================================= */
+
+.footer-creative-wrapper {
+  position: relative;
+  background-color: #050505; /* Deep, almost absolute black */
+  color: #fff;
+  overflow: hidden;
+  padding-top: 140px; /* Increased to add more black at top */
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Ambient Glow ── */
+.footer-ambient-orb {
+  position: absolute;
+  top: 0;
+  right: 15%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(93, 174, 123, 0.15) 0%, rgba(5, 5, 5, 0) 70%);
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── 1. The Floating Island CTA ── */
+.footer-island-container {
+  padding: 0 5%;
+  margin-bottom: 50px; /* Reduced from 100px */
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-cta-island {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  background: rgba(255, 255, 255, 0.03); /* Barely visible glass layer */
+  backdrop-filter: blur(40px) saturate(1.2);
+  -webkit-backdrop-filter: blur(40px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Crisp outer border */
+  border-radius: 40px;
+  padding: 60px 80px; /* Reduced vertical padding */
+  overflow: hidden;
+  box-shadow: 
+    0 40px 80px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.1); /* Inner top highlight */
+}
+
+/* Adds a subtle grain texture to the glass for a premium physical feel */
+.island-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+.island-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.island-text-group {
+  flex: 1;
+  max-width: 600px;
+}
+
+.island-kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+
+.island-headline {
+  font-size: var(--size-step-4);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin: 0 0 24px 0;
+  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.5) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.island-desc {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+/* Highly styled custom buttons */
+.island-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 250px;
+}
+
+.island-btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 12px 12px 32px;
+  background: #fff;
+  color: #111;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.btn-icon-circle {
+  width: 40px;
+  height: 40px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.island-btn-primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(255,255,255,0.15);
+}
+
+.island-btn-primary:hover .btn-icon-circle {
+  transform: scale(1.1) rotate(15deg);
+}
+
+.island-btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px 32px;
+  background: rgba(255, 255, 255, 0.05); /* very dark glass */
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.island-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+
+/* ── 2. Data Grid (Asymmetrical Structure) ── */
+.footer-data-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 80px;
+  padding: 0 5% 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 5;
+}
+
+.data-brand {
+  flex: 0 0 35%;
+}
+
+.footer-logo-bright {
+  max-width: 200px;
+  margin-bottom: 32px;
+}
+
+.data-brand-desc {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.data-links-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: space-between; /* Changed to space-between for 3 columns */
+  gap: 40px;
+}
+
+.data-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.data-col-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+
+.data-col-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.05rem;
+}
+
+.data-link-hover {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  position: relative;
+  width: max-content;
+}
+
+.data-link-hover:hover {
+  color: #fff;
+}
+
+/* Animated underline strictly for hovered links */
+.data-link-hover::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.data-link-hover:hover::after {
+  width: 100%;
+}
+
+
+/* ── 3. Massive Edge-to-Edge Typography (now overlaid, not stacking) ── */
+.footer-massive-mark-wrapper {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.footer-massive-mark {
+  font-size: 18vw;
+  font-weight: 900;
+  font-family: var(--font-heading);
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(93, 174, 123, 0.2); /* Thin green border */
+  margin: 0;
+  line-height: 0.85;
+  text-align: center;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* ── 4. Absolute Bottom Bar ── */
+.footer-absolute-bottom {
+  position: relative;
+  z-index: 10;
+  background: #000;
+  padding: 24px 5%;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.bottom-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.bottom-tag {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1200px) {
+  .footer-data-grid {
+    flex-wrap: wrap;
+    gap: 60px;
+  }
+  .data-brand {
+    flex: 0 0 100%;
+    margin-bottom: 20px;
+  }
+  .data-links-wrapper {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 900px) {
+  .island-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .footer-cta-island {
+    padding: 40px;
+    border-radius: 32px;
+  }
+
+  .island-actions {
+    width: 100%;
+  }
+
+  .data-links-wrapper {
+    flex-direction: column;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-cta-island {
+    padding: 32px;
+    border-radius: 24px;
+  }
+
+  .bottom-content {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+}
+

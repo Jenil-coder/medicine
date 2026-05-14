@@ -1,0 +1,999 @@
+/* =============================================
+   APPLICATION DETAIL PAGE
+   ============================================= */
+
+.adp-page {
+  background: var(--bg-color, #f5f7f5);
+  color: var(--text-main, #111);
+  min-height: 100vh;
+  font-family: var(--font-body);
+  padding-bottom: 100px;
+}
+
+/* ── Hero Banner ── */
+.adp-hero {
+  position: relative;
+  min-height: 480px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.adp-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.adp-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.15) 100%);
+  z-index: 2;
+}
+
+.adp-hero-color-wash {
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  mix-blend-mode: color;
+  z-index: 3;
+}
+
+.adp-hero-inner {
+  position: relative;
+  z-index: 4;
+  padding: 140px 5% 64px;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.adp-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 28px;
+  transition: color 0.2s ease;
+  letter-spacing: 0.01em;
+}
+
+.adp-back-btn:hover {
+  color: #fff;
+}
+
+.adp-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 1px solid;
+  backdrop-filter: blur(8px);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.adp-hero-inner h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 800;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  max-width: 700px;
+}
+
+.adp-hero-inner p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.75);
+  max-width: 560px;
+  margin: 0;
+}
+
+/* ── Techniques Section ── */
+.adp-techniques-section {
+  padding: 80px 5%;
+}
+
+.adp-techniques-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.adp-section-label {
+  margin-bottom: 48px;
+}
+
+.adp-label-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.78rem;
+  margin-bottom: 14px;
+}
+
+.adp-label-kicker::before {
+  content: '';
+  width: 32px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.adp-section-label h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+  letter-spacing: -0.03em;
+}
+
+/* ── Workflow Grid ── */
+.adp-workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.adp-workflow-card {
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.8);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.adp-workflow-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+}
+
+.adp-wf-img {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.adp-wf-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.adp-workflow-card:hover .adp-wf-img img {
+  transform: scale(1.06);
+}
+
+.adp-wf-body {
+  padding: 22px 24px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.adp-wf-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.adp-wf-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.adp-wf-title-row h3 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+}
+
+.adp-wf-desc {
+  font-size: 0.88rem;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.adp-wf-view-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  margin-top: auto;
+  padding-top: 8px;
+  transition: gap 0.2s ease;
+}
+
+.adp-wf-view-btn:hover {
+  gap: 10px;
+}
+
+/* ── Support Section ── */
+.adp-support-section {
+  padding: 0 5% 20px;
+}
+
+.adp-support-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.adp-support-card {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid;
+  border-radius: 20px;
+  padding: 40px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.adp-support-text h3 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.02em;
+}
+
+.adp-support-text p {
+  font-size: 0.92rem;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 480px;
+}
+
+.adp-support-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.adp-support-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  color: #fff;
+  border-radius: 100px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.adp-support-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.2);
+  filter: brightness(1.08);
+}
+
+.adp-support-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 24px;
+  border: 1px solid;
+  border-radius: 100px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.adp-support-btn-outline:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+/* ── Workflow Detail Modal ── */
+.adp-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.adp-modal-content {
+  background: #fff;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 960px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.adp-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 32px 36px 28px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.adp-modal-kicker {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.adp-modal-header h2 {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+  letter-spacing: -0.03em;
+}
+
+.adp-modal-close {
+  background: rgba(0,0,0,0.05);
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #666;
+  flex-shrink: 0;
+  margin-left: 16px;
+  transition: all 0.2s ease;
+}
+
+.adp-modal-close:hover {
+  background: #111;
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.adp-modal-body {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 0;
+}
+
+.adp-modal-left {
+  padding: 32px 36px;
+  border-right: 1px solid rgba(0,0,0,0.06);
+  overflow-y: auto;
+}
+
+.adp-modal-main-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 28px;
+}
+
+.adp-modal-section {
+  margin-bottom: 28px;
+}
+
+.adp-modal-section h3 {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #aaa;
+  margin: 0 0 12px 0;
+}
+
+.adp-extended-desc {
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: #555;
+  margin: 0;
+}
+
+.adp-feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.adp-feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+.adp-feature-list li svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── Quote Builder (Modal Right) ── */
+.adp-modal-right {
+  padding: 32px 24px;
+  background: rgba(0,0,0,0.01);
+}
+
+.adp-sticky-sidebar {
+  position: sticky;
+  top: 20px;
+}
+
+.adp-quote-builder-box {
+  border: 1px solid;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.adp-qbb-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.adp-qbb-header h4 {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+}
+
+.adp-qbb-desc {
+  font-size: 0.82rem;
+  color: #888;
+  line-height: 1.5;
+  padding: 12px 18px;
+  margin: 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+
+.adp-qbb-products {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.adp-qbb-product-row {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(0,0,0,0.04);
+  transition: all 0.2s ease;
+}
+
+.adp-qbb-product-row.in-cart {
+  background: rgba(16,185,129,0.04);
+  border-color: rgba(16,185,129,0.2);
+}
+
+.adp-qbb-product-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.adp-qbb-product-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.adp-qbb-product-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #222;
+  flex: 1;
+  line-height: 1.3;
+}
+
+.adp-qbb-in-cart-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #10B981;
+  background: rgba(16,185,129,0.1);
+  padding: 3px 8px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.adp-qbb-product-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.adp-qbb-qty-stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.adp-qbb-qty-stepper button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  padding: 2px;
+  transition: color 0.15s;
+}
+
+.adp-qbb-qty-stepper button:hover { color: #111; }
+
+.adp-qbb-add-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.adp-qbb-add-btn:hover { filter: brightness(1.1); }
+
+.adp-qbb-view-quote-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: calc(100% - 24px);
+  margin: 0 12px 14px;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.adp-qbb-view-quote-btn:hover { opacity: 0.7; }
+
+.adp-cta-box {
+  border: 1px solid;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.adp-cta-box h4 {
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 6px 0;
+}
+
+.adp-cta-box p {
+  font-size: 0.8rem;
+  color: #888;
+  line-height: 1.5;
+  margin: 0 0 14px 0;
+}
+
+.adp-cta-link {
+  display: block;
+  text-align: center;
+  padding: 9px;
+  border: 1px solid;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.82rem;
+  transition: all 0.2s ease;
+  background: #fff;
+}
+
+.adp-cta-link:hover { opacity: 0.75; }
+
+/* ── Quote Cart Panel ── */
+.adp-quote-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 99999;
+}
+
+.adp-quote-panel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 380px;
+  background: #fff;
+  box-shadow: -20px 0 60px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+}
+
+.adp-quote-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 22px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.adp-quote-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #111;
+}
+
+.adp-quote-badge {
+  background: #111;
+  color: #fff;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.adp-quote-panel-close {
+  background: rgba(0,0,0,0.05);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #555;
+  transition: all 0.2s ease;
+}
+
+.adp-quote-panel-close:hover { background: #111; color: #fff; }
+
+.adp-quote-panel-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #999;
+  padding: 40px;
+  text-align: center;
+}
+
+.adp-quote-panel-empty p {
+  font-weight: 600;
+  color: #666;
+  margin: 0;
+}
+
+.adp-quote-panel-empty span {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.adp-quote-panel-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.adp-qpi {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 12px;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.adp-qpi-icon {
+  background: rgba(0,0,0,0.05);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #777;
+  flex-shrink: 0;
+}
+
+.adp-qpi-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.adp-qpi-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #111;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.adp-qpi-cat {
+  font-size: 0.72rem;
+  color: #999;
+  display: block;
+}
+
+.adp-qpi-qty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.adp-qpi-qty button {
+  background: rgba(0,0,0,0.05);
+  border: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #555;
+  transition: all 0.15s ease;
+}
+
+.adp-qpi-qty button:hover { background: rgba(0,0,0,0.12); }
+
+.adp-qpi-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s ease;
+  padding: 4px;
+}
+
+.adp-qpi-remove:hover { color: #ef4444; }
+
+.adp-quote-panel-footer {
+  padding: 18px 20px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.adp-quote-summary {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: #888;
+  font-weight: 500;
+}
+
+.adp-quote-submit {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.adp-quote-submit:hover { background: #5DAE7B; }
+
+.adp-quote-disclaimer {
+  font-size: 0.75rem;
+  color: #aaa;
+  text-align: center;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ── Floating Quote FAB ── */
+.adp-quote-fab {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  padding: 14px 24px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  z-index: 9998;
+  transition: all 0.3s ease;
+}
+
+.adp-quote-fab:hover {
+  background: #5DAE7B;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(93,174,123,0.3);
+}
+
+.adp-quote-fab-badge {
+  background: #5DAE7B;
+  color: #fff;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .adp-modal-body {
+    grid-template-columns: 1fr;
+  }
+  .adp-modal-left {
+    border-right: none;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .adp-support-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .adp-hero {
+    min-height: 380px;
+  }
+  .adp-hero-inner {
+    padding: 120px 5% 48px;
+  }
+  .adp-techniques-section {
+    padding: 60px 5%;
+  }
+  .adp-support-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .adp-support-btn-primary,
+  .adp-support-btn-outline {
+    width: 100%;
+    justify-content: center;
+  }
+  .adp-quote-panel {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .adp-workflow-grid {
+    grid-template-columns: 1fr;
+  }
+  .adp-modal-content {
+    border-radius: 16px;
+  }
+  .adp-modal-header {
+    padding: 24px 20px;
+  }
+  .adp-modal-left {
+    padding: 24px 20px;
+  }
+  .adp-modal-right {
+    padding: 24px 16px;
+  }
+}
+

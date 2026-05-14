@@ -1,0 +1,38 @@
+{
+  "logos": [
+    "src=\"assets/images/logo/Inventa-Systems-Logo-Final.png\"",
+    "src=\"assets/images/logo/Inventa-Systems-Logo-Final.png\""
+  ],
+  "imgs": [
+    "<img src=\"assets/images/logo/Inventa-Systems-Logo-Final.png\" alt>",
+    "<img src=\"assets/images/slider/slide-1.jpg\" alt class=\"slider-bg\">",
+    "<img src=\"assets/images/slider/slide-2.jpg\" alt class=\"slider-bg\">",
+    "<img src=\"assets/images/slider/slide-3.jpg\" alt class=\"slider-bg\">",
+    "<img src=\"assets/images/slider/slider-5.jpg\" alt=\"Los Angeles\" style=\"width:100%;\">",
+    "<img src=\"assets/images/slider/slide-1.jpg\" alt=\"Los Angeles\" style=\"width:100%;\">",
+    "<img src=\"assets/images/projects/7.jpg\" alt=\"Chicago\" style=\"width:100%;\">",
+    "<img src=\"assets/images/projects/8.jpg\" alt=\"New York\" style=\"width:100%;\">",
+    "<img src=\"assets/images/about-s3-pic.jpg\" alt=\"\">",
+    "<img src=\"assets/images/signature.png\" alt=\"\">",
+    "<img src=\"assets/images/fun-fact/icon-1.png\" alt=\"\">",
+    "<img src=\"assets/images/fun-fact/icon-2.png\" alt=\"\">",
+    "<img src=\"assets/images/fun-fact/icon-3.png\" alt=\"\">",
+    "<img src=\"assets/images/projects/boxes-racks1.jpg\" alt>",
+    "<img src=\"assets/images/projects/centrifuge-ware1.jpg\" alt>",
+    "<img src=\"assets/images/projects/general-lab-ware1.jpg\" alt>",
+    "<img src=\"assets/images/projects/pcr1.jpg\" alt>",
+    "<img src=\"assets/images/projects/img-1.jpg\" alt>",
+    "<img src=\"assets/images/projects/img-2.jpg\" alt>",
+    "<img src=\"assets/images/projects/img-3.jpg\" alt>",
+    "<img src=\"assets/images/projects/img-4.jpg\" alt>",
+    "<img src=\"assets/images/projects/img-5.jpg\" alt>",
+    "<img src=\"assets/images/projects/img-6.jpg\" alt>",
+    "<img src=\"assets/images/projects/img-7.jpg\" alt>",
+    "<img src=\"assets/images/projects/img-8.jpg\" alt>",
+    "<img src=\"assets/images/contact-man.png\" alt>",
+    "<img src=\"assets/images/blog/img-1.jpg\" alt>",
+    "<img src=\"assets/images/blog/img-2.jpg\" alt>",
+    "<img src=\"assets/images/blog/img-3.jpg\" alt>",
+    "<img src=\"assets/images/logo/Inventa-Systems-Logo-Final.png\" alt>"
+  ]
+}
