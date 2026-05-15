@@ -1,152 +1,134 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, X } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { productsData } from '../data/productsData';
 import './Products.css';
 
-const productCategories = [
-  { 
-    id: '1', 
-    name: 'PCR Products', 
-    desc: 'Advanced PCR consumables and instruments for molecular diagnostics and genomic research.',
-    img: 'https://www.inventasystems.in/assets/images/projects/pcr1.jpg' 
-  },
-  { 
-    id: '2', 
-    name: 'Centrifuge Ware', 
-    desc: 'High-speed centrifuge tubes, rotors, and accessories for precision sample separation.',
-    img: 'https://www.inventasystems.in/assets/images/projects/centrifuge-ware1.jpg' 
-  },
-  { 
-    id: '3', 
-    name: 'General Lab Ware', 
-    desc: 'Pipette tips, Petri dishes, measuring cylinders, bottles, carboys, and essential daily lab consumables.',
-    img: 'https://www.inventasystems.in/assets/images/projects/general-lab-ware1.jpg' 
-  }
-];
-
 const Products = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const toggleModal = () => setIsModalOpen(!isModalOpen);
-
-  // Rotations for the 3 bundled cards
-  const bundleRotations = [-6, 0, 6];
-  const bundleOffsetsX = [-30, 0, 30];
-  const bundleOffsetsY = [10, 0, 10];
+  const [activeId, setActiveId] = useState(productsData[0].id);
+  const activeCategory = productsData.find(p => p.id === activeId) ?? productsData[0];
 
   return (
-    <section className="products-bundle-section" id="products">
-      
-      {/* ── Initial Flowing Layout ── */}
-      <div className="pb-layout">
-        
-        {/* Left Typography */}
-        <motion.div 
-          className="pb-left"
-          initial={{ opacity: 0, y: 40 }}
+    <section className="hp-products-section" id="products">
+      <div className="hp-prod-inner">
+
+        {/* Section Header */}
+        <div className="hp-prod-header">
+          <span className="hp-prod-kicker">Our Products</span>
+          <h2 className="hp-prod-headline">Precision instruments for every discipline.</h2>
+        </div>
+
+        {/* Explorer: Category Nav + Family Panel */}
+        <div className="hp-prod-explorer">
+
+          {/* LEFT — Category Navigator */}
+          <nav className="hp-prod-cat-nav">
+            {productsData.map(cat => {
+              const Icon = cat.icon;
+              const isActive = cat.id === activeId;
+              return (
+                <button
+                  key={cat.id}
+                  className={`hp-prod-cat-btn ${isActive ? 'is-active' : ''}`}
+                  style={isActive ? { '--cat-clr': cat.color } : {}}
+                  onClick={() => setActiveId(cat.id)}
+                >
+                  <span className="hp-cat-icon" style={isActive ? { background: `${cat.color}18`, color: cat.color } : {}}>
+                    <Icon size={15} />
+                  </span>
+                  <span className="hp-cat-label">{cat.title}</span>
+                  {isActive && (
+                    <motion.span
+                      layoutId="cat-indicator"
+                      className="hp-cat-indicator"
+                      style={{ background: cat.color }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* RIGHT — Family Cards Panel */}
+          <div className="hp-prod-panel-wrap">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeCategory.id}
+                className="hp-prod-panel"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {/* Category info strip */}
+                <div className="hp-panel-meta">
+                  <div className="hp-panel-meta-left">
+                    <span className="hp-panel-kicker" style={{ color: activeCategory.color }}>
+                      {activeCategory.shortTitle}
+                    </span>
+                    <p className="hp-panel-overview">{activeCategory.overview}</p>
+                  </div>
+                  <Link
+                    to={`/products/${activeCategory.id}`}
+                    className="hp-panel-view-all"
+                    style={{ color: activeCategory.color, borderColor: `${activeCategory.color}40` }}
+                  >
+                    View Category <ArrowRight size={14} />
+                  </Link>
+                </div>
+
+                {/* 3 Family Cards */}
+                <div className="hp-families-grid">
+                  {activeCategory.families.slice(0, 3).map((family, i) => (
+                    <motion.div
+                      key={family.id}
+                      initial={{ opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      <Link to={`/products/${activeCategory.id}`} className="hp-family-card">
+                        <div className="hp-family-img-wrap">
+                          <img src={family.image} alt={family.name} className="hp-family-img" />
+                          <div
+                            className="hp-family-gradient"
+                            style={{ background: `linear-gradient(to top, ${activeCategory.color}cc 0%, transparent 60%)` }}
+                          />
+                        </div>
+                        <div className="hp-family-body">
+                          <h4 className="hp-family-name">{family.name}</h4>
+                          <p className="hp-family-tagline">{family.tagline}</p>
+                          <span className="hp-family-cta" style={{ color: activeCategory.color }}>
+                            Explore <ArrowRight size={13} />
+                          </span>
+                        </div>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Footer CTA */}
+        <motion.div
+          className="hp-prod-footer"
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="products-kicker">Our Product Range</span>
-          <h2 className="products-headline">Precision instruments for every discipline.</h2>
-          <p className="products-desc">Authorized distributor of Plastic Labware, Bottles, Carboys, Measuring Cylinders, Desiccators, Minicoolers, Cryoboxes, Test Tube Racks, Pipette Tips, Petri Dishes, Centrifuge Tubes, Cryo Vials, and Pasteur Pipettes.</p>
-          
-          <Link to="/products" className="pb-explore-btn">
-            <span>Explore All Equipment</span>
+          <p className="hp-prod-footer-desc">
+            Explore our full catalogue of 16 product categories — from analytical instruments and lab automation to molecular biology reagents and water purification systems.
+          </p>
+          <Link to="/products" className="hp-prod-explore-btn">
+            <span>Explore All 16 Product Categories</span>
             <ArrowRight size={18} />
           </Link>
         </motion.div>
 
-        {/* Right Bundle (Clickable) */}
-        <div className="pb-right">
-          <motion.div 
-            className="pb-bundle-container"
-            whileHover="hover"
-            onClick={toggleModal}
-            style={{ cursor: 'pointer' }}
-          >
-            {productCategories.map((item, i) => (
-              <motion.div 
-                key={item.id}
-                className="pb-bundle-card"
-                initial={{ rotate: bundleRotations[i], x: bundleOffsetsX[i], y: bundleOffsetsY[i] }}
-                animate={{ rotate: bundleRotations[i], x: bundleOffsetsX[i], y: bundleOffsetsY[i], zIndex: i }}
-                variants={{
-                  hover: { 
-                    y: bundleOffsetsY[i] - 20, 
-                    rotate: bundleRotations[i] * 1.5,
-                    scale: 1.02,
-                    transition: { duration: 0.4, ease: "easeOut" } 
-                  }
-                }}
-              >
-                <img 
-                  src={item.img} 
-                  alt={item.name} 
-                  className="pb-bundle-img" 
-                />
-                <div className="pb-bundle-overlay" />
-                <div className="pb-bundle-text">
-                  <h3>{item.name}</h3>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
       </div>
-
-      {/* ── Full-Screen Modal Overlay ── */}
-      <AnimatePresence>
-        {isModalOpen && (
-          <motion.div 
-            className="pb-modal-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-          >
-            <div className="pb-modal-header">
-              <h2>Key Product Categories</h2>
-              <button className="pb-close-btn" onClick={toggleModal}>
-                <X size={24} />
-              </button>
-            </div>
-
-            <div className="pb-modal-grid">
-              {productCategories.map((item, i) => (
-                <motion.div 
-                  key={item.id}
-                  className="pb-modal-card"
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1, duration: 0.6 }}
-                >
-                  <img src={item.img} alt={item.name} className="pb-modal-img" />
-                  <div className="pb-modal-gradient" />
-                  <div className="pb-modal-content">
-                    <h3>{item.name}</h3>
-                    <p>{item.desc}</p>
-                    <Link to="/products" className="pb-card-btn">View Full Details</Link>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            <motion.div 
-              className="pb-modal-footer"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-            >
-              <Link to="/products" className="pb-modal-explore">
-                <span>Explore Full Range</span>
-                <ArrowRight size={20} />
-              </Link>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 };

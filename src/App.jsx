@@ -5,12 +5,13 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import ApplicationsPage from './pages/ApplicationsPage';
 import ApplicationDetailPage from './pages/ApplicationDetailPage';
+import ProductsPage from './pages/ProductsPage';
+import ProductCategoryPage from './pages/ProductCategoryPage';
 import ServicesPage from './pages/ServicesPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import CareersPage from './pages/CareersPage';
 
-// Scroll to top on route change
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -37,6 +38,8 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/applications" element={<ApplicationsPage />} />
           <Route path="/applications/:id" element={<ApplicationDetailPage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products/:categoryId" element={<ProductCategoryPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/contact" element={<ContactPage />} />
