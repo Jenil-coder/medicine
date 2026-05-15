@@ -67,6 +67,7 @@ const QuoteCartPanel = ({ cart, onUpdateQty, onRemove, onClose, onSubmit }) => {
 /* ── Family Drawer ── */
 const FamilyDrawer = ({ family, category, quoteCart, quantities, addedItem, onClose, onAddToQuote, onQuantityChange, onViewCart, totalCartItems }) => {
   const [activeModelIdx, setActiveModelIdx] = useState(0);
+  const [askMessage, setAskMessage] = useState('');
   const activeModel = family.models[activeModelIdx];
 
   useEffect(() => {
@@ -265,13 +266,23 @@ const FamilyDrawer = ({ family, category, quoteCart, quantities, addedItem, onCl
 
             {/* Ask About This + Technical Support */}
             <div className="pcp-drawer-contact">
-              <a
-                href={`mailto:info@inventasystems.in?subject=${enquirySubject}&body=${enquiryBody}`}
-                className="pcp-ask-btn"
-                style={{ color: category.color, borderColor: `${category.color}30` }}
-              >
-                Ask About This Product
-              </a>
+              <div className="pcp-ask-block" style={{ borderColor: `${category.color}30` }}>
+                <span className="pcp-ask-label" style={{ color: category.color }}>Ask About This Product</span>
+                <textarea
+                  className="pcp-ask-input"
+                  placeholder="Type your question about this product…"
+                  value={askMessage}
+                  onChange={e => setAskMessage(e.target.value)}
+                  rows={3}
+                />
+                <a
+                  href={`mailto:info@inventasystems.in?subject=${enquirySubject}&body=${encodeURIComponent(askMessage || enquiryBody)}`}
+                  className="pcp-ask-submit"
+                  style={{ background: category.color }}
+                >
+                  Send Enquiry
+                </a>
+              </div>
               <Link to="/contact" className="pcp-support-link">Technical Support →</Link>
             </div>
 
@@ -402,10 +413,10 @@ const ProductCategoryPage = () => {
                   </div>
                   <button
                     className="pcp-fc-view-btn"
-                    style={{ color: category.color, borderColor: `${category.color}35` }}
+                    style={{ color: category.color, borderColor: `${category.color}35`, '--btn-color': category.color }}
                     onClick={e => { e.stopPropagation(); setSelectedFamily(family); }}
                   >
-                    View Family <ArrowRight size={14} />
+                    View Detail <ArrowRight size={14} />
                   </button>
                 </div>
               </motion.div>

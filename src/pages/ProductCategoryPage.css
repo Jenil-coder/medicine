@@ -254,9 +254,10 @@
 }
 
 .pcp-fc-view-btn:hover {
-  background: currentColor;
-  color: #fff;
-  filter: brightness(0) invert(1);
+  background: var(--btn-color, currentColor);
+  color: #fff !important;
+  border-color: var(--btn-color, currentColor) !important;
+  opacity: 0.92;
 }
 
 /* ── Support Section ── */
@@ -810,26 +811,68 @@
   gap: 10px;
 }
 
-.pcp-ask-btn {
+.pcp-ask-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1.5px solid;
+  border-radius: 12px;
+  padding: 14px;
+  background: #fff;
+}
+
+.pcp-ask-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.pcp-ask-input {
+  width: 100%;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.83rem;
+  font-family: inherit;
+  color: var(--text-main);
+  background: #f8f9f7;
+  resize: none;
+  outline: none;
+  transition: border-color 0.2s ease;
+  line-height: 1.55;
+  box-sizing: border-box;
+}
+
+.pcp-ask-input:focus {
+  border-color: currentColor;
+  background: #fff;
+}
+
+.pcp-ask-input::placeholder {
+  color: #aaa;
+}
+
+.pcp-ask-submit {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
   text-decoration: none;
-  border: 1.5px solid;
-  border-radius: 10px;
-  padding: 11px 16px;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
   font-size: 0.83rem;
   font-weight: 700;
   font-family: inherit;
+  color: #fff;
   text-align: center;
-  transition: background 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.pcp-ask-btn:hover {
-  background: currentColor;
-  color: #fff;
-  filter: brightness(0) invert(1);
+.pcp-ask-submit:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
 }
 
 .pcp-support-link {
