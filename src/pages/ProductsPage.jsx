@@ -147,7 +147,7 @@ const ProductsPage = () => {
         {/* ── Sticky Sidebar ── */}
         <aside className="pp-sidebar">
           <nav className="pp-sidebar-nav">
-            <h3 className="pp-sidebar-title">Categories</h3>
+            <h3 className="pp-sidebar-title">Products</h3>
             <ul>
               {productsData.map(cat => {
                 const Icon = cat.icon;

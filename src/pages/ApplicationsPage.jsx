@@ -149,7 +149,7 @@ const ApplicationsPage = () => {
         {/* Sticky Sidebar */}
         <aside className="corp-sidebar">
           <nav className="corp-sidebar-nav">
-            <h3 className="corp-sidebar-title">Categories</h3>
+            <h3 className="corp-sidebar-title">Applications</h3>
             <ul>
               {applicationsData.map(app => {
                 const Icon = app.icon;
