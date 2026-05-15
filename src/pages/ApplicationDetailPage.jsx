@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
   ArrowRight, ArrowLeft, X,
-  CheckCircle2, Box, ShoppingCart, Trash2, Plus, Minus, Send,
-  Eye, MessageSquare, Mail, User, FileText, Sparkles
+  CheckCircle2, Box, ShoppingCart, Trash2, Plus, Minus, Send, MessageSquare
 } from 'lucide-react';
 import { applicationsData } from '../data/applicationsData';
 import './ApplicationDetailPage.css';
@@ -67,186 +66,6 @@ const QuoteCartPanel = ({ cart, onUpdateQty, onRemove, onClose, onSubmit }) => {
   );
 };
 
-/* ─────────────────────────────────────────
-   Quick View Modal
-───────────────────────────────────────── */
-const QuickViewModal = ({ product, workflow, accentColor, onClose, onAddToQuote, onAskAbout, inCart }) => {
-  useEffect(() => {
-    const handler = e => { if (e.key === 'Escape') onClose(); };
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
-  }, [onClose]);
-
-  return (
-    <div className="adp-qv-overlay" onClick={onClose}>
-      <div className="adp-qv-modal" onClick={e => e.stopPropagation()}>
-        <div className="adp-qv-header" style={{ borderColor: `${accentColor}20` }}>
-          <div className="adp-qv-header-left">
-            <span className="adp-qv-kicker" style={{ color: accentColor }}>Quick View</span>
-            <h3 className="adp-qv-title">{product}</h3>
-          </div>
-          <button className="adp-qv-close" onClick={onClose}><X size={18} /></button>
-        </div>
-
-        <div className="adp-qv-body">
-          <div className="adp-qv-img-wrap">
-            <img src={workflow.image} alt={product} className="adp-qv-img" />
-            <div className="adp-qv-img-badge" style={{ background: accentColor }}>
-              <Box size={12} />
-              <span>{workflow.title}</span>
-            </div>
-          </div>
-
-          <div className="adp-qv-content">
-            <p className="adp-qv-desc">{workflow.extendedDescription}</p>
-
-            <div className="adp-qv-specs">
-              <span className="adp-qv-specs-label">Key Capabilities</span>
-              <ul className="adp-qv-specs-list">
-                {workflow.keyFeatures.map((f, i) => (
-                  <li key={i}>
-                    <CheckCircle2 size={14} style={{ color: accentColor, flexShrink: 0 }} />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div className="adp-qv-footer" style={{ borderColor: `${accentColor}15` }}>
-          <button
-            className="adp-qv-enquire-btn"
-            style={{ color: accentColor, borderColor: `${accentColor}35` }}
-            onClick={() => { onClose(); onAskAbout(); }}
-          >
-            <MessageSquare size={14} />
-            Ask About This
-          </button>
-          <button
-            className="adp-qv-add-btn"
-            style={{ background: inCart ? '#10B981' : accentColor }}
-            onClick={onAddToQuote}
-          >
-            {inCart
-              ? <><CheckCircle2 size={14} /> In Quote</>
-              : <><ShoppingCart size={14} /> Add to Quote</>}
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-/* ─────────────────────────────────────────
-   Enquiry Modal
-───────────────────────────────────────── */
-const EnquiryModal = ({ product, application, accentColor, onClose }) => {
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    message: `I would like to enquire about the ${product} for use in our ${application} workflow. Please provide pricing, availability, and technical specifications.`,
-  });
-  const [sent, setSent] = useState(false);
-
-  useEffect(() => {
-    const handler = e => { if (e.key === 'Escape') onClose(); };
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
-  }, [onClose]);
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    const subject = encodeURIComponent(`Product Enquiry: ${product} — ${application}`);
-    const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`);
-    window.open(`mailto:info@inventasystems.in?subject=${subject}&body=${body}`);
-    setSent(true);
-  };
-
-  return (
-    <div className="adp-enq-overlay" onClick={onClose}>
-      <div className="adp-enq-modal" onClick={e => e.stopPropagation()}>
-        {sent ? (
-          <div className="adp-enq-success">
-            <div className="adp-enq-success-icon" style={{ color: accentColor, background: `${accentColor}12` }}>
-              <Sparkles size={28} />
-            </div>
-            <h3>Enquiry Sent!</h3>
-            <p>Your email client has been opened with the pre-filled enquiry. Our team will respond within 24 hours.</p>
-            <button className="adp-enq-done-btn" style={{ background: accentColor }} onClick={onClose}>Done</button>
-          </div>
-        ) : (
-          <>
-            <div className="adp-enq-header" style={{ borderColor: `${accentColor}20` }}>
-              <div className="adp-enq-header-icon" style={{ background: `${accentColor}12`, color: accentColor }}>
-                <MessageSquare size={18} />
-              </div>
-              <div className="adp-enq-header-text">
-                <span className="adp-enq-kicker" style={{ color: accentColor }}>Product Enquiry</span>
-                <h3>{product}</h3>
-                <span className="adp-enq-app-tag">{application}</span>
-              </div>
-              <button className="adp-enq-close" onClick={onClose}><X size={18} /></button>
-            </div>
-
-            <form className="adp-enq-form" onSubmit={handleSubmit}>
-              <div className="adp-enq-field">
-                <label htmlFor="enq-name">
-                  <User size={13} /> Your Name
-                </label>
-                <input
-                  id="enq-name"
-                  type="text"
-                  placeholder="Dr. Jane Smith"
-                  value={form.name}
-                  onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
-                  required
-                  style={{ '--focus-color': accentColor }}
-                />
-              </div>
-
-              <div className="adp-enq-field">
-                <label htmlFor="enq-email">
-                  <Mail size={13} /> Email Address
-                </label>
-                <input
-                  id="enq-email"
-                  type="email"
-                  placeholder="jane@laboratory.com"
-                  value={form.email}
-                  onChange={e => setForm(p => ({ ...p, email: e.target.value }))}
-                  required
-                  style={{ '--focus-color': accentColor }}
-                />
-              </div>
-
-              <div className="adp-enq-field">
-                <label htmlFor="enq-msg">
-                  <FileText size={13} /> Message
-                </label>
-                <textarea
-                  id="enq-msg"
-                  rows={5}
-                  value={form.message}
-                  onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
-                  style={{ '--focus-color': accentColor }}
-                />
-              </div>
-
-              <div className="adp-enq-footer">
-                <button type="button" className="adp-enq-cancel" onClick={onClose}>Cancel</button>
-                <button type="submit" className="adp-enq-submit" style={{ background: accentColor }}>
-                  <Send size={14} />
-                  Send Enquiry
-                </button>
-              </div>
-            </form>
-          </>
-        )}
-      </div>
-    </div>
-  );
-};
 
 /* ─────────────────────────────────────────
    Main Page
@@ -261,18 +80,17 @@ const ApplicationDetailPage = () => {
   const [quantities, setQuantities] = useState({});
   const [showCart, setShowCart] = useState(false);
   const [addedItem, setAddedItem] = useState(null);
-  const [quickViewProduct, setQuickViewProduct] = useState(null);
-  const [enquiryProduct, setEnquiryProduct] = useState(null);
+  const [askMessage, setAskMessage] = useState('');
 
   useEffect(() => {
     if (!app) navigate('/applications', { replace: true });
   }, [app, navigate]);
 
   useEffect(() => {
-    const anyOverlay = selectedWorkflow || showCart || quickViewProduct || enquiryProduct;
+    const anyOverlay = selectedWorkflow || showCart;
     document.body.style.overflow = anyOverlay ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
-  }, [selectedWorkflow, showCart, quickViewProduct, enquiryProduct]);
+  }, [selectedWorkflow, showCart]);
 
   if (!app) return null;
 
@@ -430,7 +248,7 @@ const ApplicationDetailPage = () => {
                       <ShoppingCart size={18} style={{ color: selectedWorkflow.appColor }} />
                       <h4>Build Your Quote</h4>
                     </div>
-                    <p className="adp-qbb-desc">Select products, preview details, or ask our team for guidance.</p>
+                    <p className="adp-qbb-desc">Select products and quantities to build your quote request.</p>
 
                     <div className="adp-qbb-products">
                       {selectedWorkflow.relatedProducts.map((product, idx) => {
@@ -465,28 +283,6 @@ const ApplicationDetailPage = () => {
                               </button>
                             </div>
 
-                            {/* Quick View + Ask About */}
-                            <div className="adp-qbb-product-secondary-actions">
-                              <button
-                                className="adp-qbb-secondary-btn"
-                                style={{ color: selectedWorkflow.appColor, borderColor: `${selectedWorkflow.appColor}30` }}
-                                onClick={() => setQuickViewProduct({ product, workflow: selectedWorkflow, accentColor: selectedWorkflow.appColor })}
-                                title="Quick View"
-                              >
-                                <Eye size={12} />
-                                Quick View
-                              </button>
-                              <button
-                                className="adp-qbb-secondary-btn"
-                                style={{ color: '#666', borderColor: 'rgba(0,0,0,0.1)' }}
-                                onClick={() => setEnquiryProduct({ product, application: selectedWorkflow.appCategory, accentColor: selectedWorkflow.appColor })}
-                                title="Ask about this product"
-                              >
-                                <MessageSquare size={12} />
-                                Ask About This
-                              </button>
-                            </div>
-
                           </div>
                         );
                       })}
@@ -504,15 +300,27 @@ const ApplicationDetailPage = () => {
                     )}
                   </div>
 
-                  {/* Ask About This Product — simple mailto, no popup */}
-                  <a
-                    href={`mailto:info@inventasystems.in?subject=Product%20Enquiry%3A%20${encodeURIComponent(selectedWorkflow.title)}%20%E2%80%94%20${encodeURIComponent(selectedWorkflow.appCategory)}&body=Hello%2C%0A%0AI%20would%20like%20to%20enquire%20about%20the%20${encodeURIComponent(selectedWorkflow.title)}%20solutions%20for%20${encodeURIComponent(selectedWorkflow.appCategory)}.%0A%0APlease%20provide%20more%20information%20on%20pricing%2C%20availability%2C%20and%20technical%20specifications.%0A%0AThank%20you.`}
-                    className="adp-ask-product-link"
-                    style={{ borderColor: `${selectedWorkflow.appColor}35`, color: selectedWorkflow.appColor }}
-                  >
-                    <MessageSquare size={15} />
-                    Ask About This Product
-                  </a>
+                  {/* Ask About This Product — input block */}
+                  <div className="adp-ask-block" style={{ borderColor: `${selectedWorkflow.appColor}30` }}>
+                    <span className="adp-ask-label" style={{ color: selectedWorkflow.appColor }}>
+                      <MessageSquare size={13} />
+                      Ask About This Product
+                    </span>
+                    <textarea
+                      className="adp-ask-input"
+                      placeholder="Type your question about this workflow or product…"
+                      value={askMessage}
+                      onChange={e => setAskMessage(e.target.value)}
+                      rows={3}
+                    />
+                    <a
+                      href={`mailto:info@inventasystems.in?subject=${encodeURIComponent(`Product Enquiry: ${selectedWorkflow.title} — ${selectedWorkflow.appCategory}`)}&body=${encodeURIComponent(askMessage || `Hello,\n\nI would like to enquire about the ${selectedWorkflow.title} solutions for ${selectedWorkflow.appCategory}.\n\nPlease provide more information on pricing, availability, and technical specifications.\n\nThank you.`)}`}
+                      className="adp-ask-submit"
+                      style={{ background: selectedWorkflow.appColor }}
+                    >
+                      <Send size={13} /> Send Enquiry
+                    </a>
+                  </div>
 
                   <div className="adp-cta-box" style={{ background: `${selectedWorkflow.appColor}08`, borderColor: `${selectedWorkflow.appColor}20` }}>
                     <h4>Technical Support</h4>
@@ -552,34 +360,6 @@ const ApplicationDetailPage = () => {
         />
       )}
 
-      {/* ── Quick View Modal ── */}
-      {quickViewProduct && (
-        <QuickViewModal
-          product={quickViewProduct.product}
-          workflow={quickViewProduct.workflow}
-          accentColor={quickViewProduct.accentColor}
-          inCart={quoteCart.some(i => i.name === quickViewProduct.product)}
-          onClose={() => setQuickViewProduct(null)}
-          onAddToQuote={() => {
-            handleAddToQuote(quickViewProduct.product, quickViewProduct.workflow.appCategory);
-          }}
-          onAskAbout={() => setEnquiryProduct({
-            product: quickViewProduct.product,
-            application: quickViewProduct.workflow.appCategory,
-            accentColor: quickViewProduct.accentColor,
-          })}
-        />
-      )}
-
-      {/* ── Enquiry Modal ── */}
-      {enquiryProduct && (
-        <EnquiryModal
-          product={enquiryProduct.product}
-          application={enquiryProduct.application}
-          accentColor={enquiryProduct.accentColor}
-          onClose={() => setEnquiryProduct(null)}
-        />
-      )}
 
     </main>
   );
