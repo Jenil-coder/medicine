@@ -216,11 +216,13 @@ const Hero = () => {
     const handleScroll = () => {
       const rect = section.getBoundingClientRect();
       const sectionHeight = section.offsetHeight - window.innerHeight;
+      if (sectionHeight <= 0) return;
       const scrolled = -rect.top;
       const progress = Math.max(0, Math.min(1, scrolled / sectionHeight));
 
       const sectionCount = scrollSections.length;
       const newSection = Math.min(sectionCount - 1, Math.floor(progress * sectionCount));
+      if (!Number.isFinite(newSection) || newSection < 0) return;
       setActiveSection(newSection);
 
       // Direct mapping — zero delay, instant frame response
@@ -233,7 +235,7 @@ const Hero = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const currentSection = scrollSections[activeSection];
+  const currentSection = scrollSections[activeSection] ?? scrollSections[0];
 
   return (
     <section className="hero-scroll-wrapper" ref={sectionRef} onMouseMove={handleMouseMove}>
