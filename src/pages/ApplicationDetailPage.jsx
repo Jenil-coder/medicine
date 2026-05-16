@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
   ArrowRight, ArrowLeft, X,
-  CheckCircle2, Box, ShoppingCart, Trash2, Plus, Minus, Send, MessageSquare
+  CheckCircle2, Box, ShoppingCart, Trash2, Plus, Minus, Send, Phone, User, Mail, MessageSquare
 } from 'lucide-react';
 import { applicationsData } from '../data/applicationsData';
 import './ApplicationDetailPage.css';
@@ -80,6 +80,8 @@ const ApplicationDetailPage = () => {
   const [quantities, setQuantities] = useState({});
   const [showCart, setShowCart] = useState(false);
   const [addedItem, setAddedItem] = useState(null);
+  const [askName, setAskName] = useState('');
+  const [askEmail, setAskEmail] = useState('');
   const [askMessage, setAskMessage] = useState('');
 
   useEffect(() => {
@@ -91,6 +93,10 @@ const ApplicationDetailPage = () => {
     document.body.style.overflow = anyOverlay ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [selectedWorkflow, showCart]);
+
+  useEffect(() => {
+    if (selectedWorkflow) { setAskName(''); setAskEmail(''); setAskMessage(''); }
+  }, [selectedWorkflow]);
 
   if (!app) return null;
 
@@ -263,8 +269,10 @@ const ApplicationDetailPage = () => {
                               <div className="adp-qbb-product-icon" style={{ background: `${selectedWorkflow.appColor}15`, color: selectedWorkflow.appColor }}>
                                 <Box size={16} />
                               </div>
-                              <span className="adp-qbb-product-name">{product}</span>
-                              {inCart && <span className="adp-qbb-in-cart-tag">In Quote</span>}
+                              <div className="adp-qbb-product-text">
+                                <span className="adp-qbb-product-name">{product}</span>
+                                {inCart ? <span className="adp-qbb-in-cart-tag">In Quote</span> : <span className="adp-qbb-unit-tag">Unit</span>}
+                              </div>
                             </div>
 
                             {/* Qty + Add to Quote */}
@@ -300,21 +308,47 @@ const ApplicationDetailPage = () => {
                     )}
                   </div>
 
-                  {/* Ask About This Product — input block */}
+                  {/* Ask About This Application — 3-field form */}
                   <div className="adp-ask-block" style={{ borderColor: `${selectedWorkflow.appColor}30` }}>
                     <span className="adp-ask-label" style={{ color: selectedWorkflow.appColor }}>
-                      <MessageSquare size={13} />
-                      Ask About This Product
+                      Ask About This Application
                     </span>
-                    <textarea
-                      className="adp-ask-input"
-                      placeholder="Type your question about this workflow or product…"
-                      value={askMessage}
-                      onChange={e => setAskMessage(e.target.value)}
-                      rows={3}
-                    />
+
+                    <div className="adp-ask-field">
+                      <div className="adp-ask-field-icon"><User size={13} /></div>
+                      <input
+                        className="adp-ask-input-field"
+                        type="text"
+                        placeholder="Your Name"
+                        value={askName}
+                        onChange={e => setAskName(e.target.value)}
+                      />
+                    </div>
+
+                    <div className="adp-ask-field">
+                      <div className="adp-ask-field-icon"><Mail size={13} /></div>
+                      <input
+                        className="adp-ask-input-field"
+                        type="email"
+                        placeholder="Email Address"
+                        value={askEmail}
+                        onChange={e => setAskEmail(e.target.value)}
+                      />
+                    </div>
+
+                    <div className="adp-ask-field adp-ask-field--textarea">
+                      <div className="adp-ask-field-icon adp-ask-field-icon--top"><MessageSquare size={13} /></div>
+                      <textarea
+                        className="adp-ask-input-field adp-ask-textarea"
+                        placeholder="Describe your requirement or any questions about this application…"
+                        value={askMessage}
+                        onChange={e => setAskMessage(e.target.value)}
+                        rows={3}
+                      />
+                    </div>
+
                     <a
-                      href={`mailto:info@inventasystems.in?subject=${encodeURIComponent(`Product Enquiry: ${selectedWorkflow.title} — ${selectedWorkflow.appCategory}`)}&body=${encodeURIComponent(askMessage || `Hello,\n\nI would like to enquire about the ${selectedWorkflow.title} solutions for ${selectedWorkflow.appCategory}.\n\nPlease provide more information on pricing, availability, and technical specifications.\n\nThank you.`)}`}
+                      href={`mailto:info@inventasystems.in?subject=${encodeURIComponent('Application Enquiry: ' + selectedWorkflow.title + ' — ' + selectedWorkflow.appCategory)}&body=${encodeURIComponent('Name: ' + askName + '\nEmail: ' + askEmail + '\n\nMessage:\n' + (askMessage || 'I would like to enquire about the ' + selectedWorkflow.title + ' application.'))}`}
                       className="adp-ask-submit"
                       style={{ background: selectedWorkflow.appColor }}
                     >
@@ -322,17 +356,10 @@ const ApplicationDetailPage = () => {
                     </a>
                   </div>
 
-                  <div className="adp-cta-box" style={{ background: `${selectedWorkflow.appColor}08`, borderColor: `${selectedWorkflow.appColor}20` }}>
-                    <h4>Technical Support</h4>
-                    <p>Speak with an applications specialist about this workflow.</p>
-                    <Link
-                      to="/contact"
-                      className="adp-cta-link"
-                      style={{ color: selectedWorkflow.appColor, borderColor: selectedWorkflow.appColor }}
-                    >
-                      Contact a Specialist
-                    </Link>
-                  </div>
+                  <a href="tel:+918734013927" className="adp-support-call-btn">
+                    <Phone size={15} />
+                    Call Technical Support
+                  </a>
                 </div>
               </div>
             </div>
