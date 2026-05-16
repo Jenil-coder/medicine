@@ -85,7 +85,15 @@
   padding: 24px 18px;
   border: 1px solid rgba(255,255,255,0.8);
   box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  max-height: calc(100vh - 130px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,0.1) transparent;
 }
+
+.corp-sidebar::-webkit-scrollbar { width: 4px; }
+.corp-sidebar::-webkit-scrollbar-track { background: transparent; }
+.corp-sidebar::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 2px; }
 
 .corp-sidebar-title {
   font-family: var(--font-heading);
@@ -115,8 +123,9 @@
   text-decoration: none;
   border-radius: 12px;
   font-weight: 500;
-  font-size: 0.88rem;
+  font-size: 0.83rem;
   transition: all 0.2s ease;
+  min-width: 0;
 }
 
 .corp-sidebar-nav a:hover {
@@ -131,12 +140,20 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
+.corp-sidebar-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .corp-sidebar-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 9px;
   color: #999;
   background: rgba(0,0,0,0.03);
