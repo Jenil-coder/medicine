@@ -88,12 +88,13 @@
   max-height: calc(100vh - 130px);
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgba(0,0,0,0.1) transparent;
+  scrollbar-color: rgba(93,174,123,0.28) transparent;
 }
 
 .corp-sidebar::-webkit-scrollbar { width: 4px; }
 .corp-sidebar::-webkit-scrollbar-track { background: transparent; }
-.corp-sidebar::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 2px; }
+.corp-sidebar::-webkit-scrollbar-thumb { background: rgba(93,174,123,0.3); border-radius: 100px; }
+.corp-sidebar::-webkit-scrollbar-thumb:hover { background: rgba(93,174,123,0.55); }
 
 .corp-sidebar-title {
   font-family: var(--font-heading);
@@ -463,9 +464,10 @@
   overflow-y: auto;
 }
 
-.corp-modal-body::-webkit-scrollbar { width: 5px; }
+.corp-modal-body::-webkit-scrollbar { width: 4px; }
 .corp-modal-body::-webkit-scrollbar-track { background: transparent; }
-.corp-modal-body::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 3px; }
+.corp-modal-body::-webkit-scrollbar-thumb { background: rgba(93,174,123,0.3); border-radius: 100px; }
+.corp-modal-body::-webkit-scrollbar-thumb:hover { background: rgba(93,174,123,0.55); }
 
 /* Left Column */
 .corp-modal-left {

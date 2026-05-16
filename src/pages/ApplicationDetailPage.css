@@ -372,25 +372,13 @@
   box-shadow: 0 40px 80px rgba(0,0,0,0.2);
   position: relative;
   scrollbar-width: thin;
-  scrollbar-color: rgba(0,0,0,0.12) transparent;
+  scrollbar-color: rgba(93,174,123,0.28) transparent;
 }
 
-.adp-modal-content::-webkit-scrollbar {
-  width: 5px;
-}
-
-.adp-modal-content::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.adp-modal-content::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,0.12);
-  border-radius: 100px;
-}
-
-.adp-modal-content::-webkit-scrollbar-thumb:hover {
-  background: rgba(0,0,0,0.22);
-}
+.adp-modal-content::-webkit-scrollbar { width: 4px; }
+.adp-modal-content::-webkit-scrollbar-track { background: transparent; }
+.adp-modal-content::-webkit-scrollbar-thumb { background: rgba(93,174,123,0.3); border-radius: 100px; }
+.adp-modal-content::-webkit-scrollbar-thumb:hover { background: rgba(93,174,123,0.55); }
 
 .adp-modal-header {
   display: flex;
@@ -451,25 +439,13 @@
   border-right: 1px solid rgba(0,0,0,0.06);
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgba(0,0,0,0.1) transparent;
+  scrollbar-color: rgba(93,174,123,0.28) transparent;
 }
 
-.adp-modal-left::-webkit-scrollbar {
-  width: 4px;
-}
-
-.adp-modal-left::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.adp-modal-left::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,0.1);
-  border-radius: 100px;
-}
-
-.adp-modal-left::-webkit-scrollbar-thumb:hover {
-  background: rgba(0,0,0,0.2);
-}
+.adp-modal-left::-webkit-scrollbar { width: 4px; }
+.adp-modal-left::-webkit-scrollbar-track { background: transparent; }
+.adp-modal-left::-webkit-scrollbar-thumb { background: rgba(93,174,123,0.3); border-radius: 100px; }
+.adp-modal-left::-webkit-scrollbar-thumb:hover { background: rgba(93,174,123,0.55); }
 
 .adp-modal-main-img {
   width: 100%;
@@ -958,25 +934,13 @@
   flex-direction: column;
   gap: 10px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(0,0,0,0.1) transparent;
+  scrollbar-color: rgba(93,174,123,0.28) transparent;
 }
 
-.adp-quote-panel-items::-webkit-scrollbar {
-  width: 4px;
-}
-
-.adp-quote-panel-items::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.adp-quote-panel-items::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,0.1);
-  border-radius: 100px;
-}
-
-.adp-quote-panel-items::-webkit-scrollbar-thumb:hover {
-  background: rgba(0,0,0,0.2);
-}
+.adp-quote-panel-items::-webkit-scrollbar { width: 4px; }
+.adp-quote-panel-items::-webkit-scrollbar-track { background: transparent; }
+.adp-quote-panel-items::-webkit-scrollbar-thumb { background: rgba(93,174,123,0.3); border-radius: 100px; }
+.adp-quote-panel-items::-webkit-scrollbar-thumb:hover { background: rgba(93,174,123,0.55); }
 
 .adp-qpi {
   display: flex;

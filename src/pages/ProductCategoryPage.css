@@ -418,8 +418,13 @@
   padding: 24px 28px 32px;
   border-right: 1px solid rgba(0, 0, 0, 0.07);
   scrollbar-width: thin;
-  scrollbar-color: rgba(0,0,0,0.1) transparent;
+  scrollbar-color: rgba(93,174,123,0.28) transparent;
 }
+
+.pcp-drawer-left::-webkit-scrollbar { width: 4px; }
+.pcp-drawer-left::-webkit-scrollbar-track { background: transparent; }
+.pcp-drawer-left::-webkit-scrollbar-thumb { background: rgba(93,174,123,0.3); border-radius: 100px; }
+.pcp-drawer-left::-webkit-scrollbar-thumb:hover { background: rgba(93,174,123,0.55); }
 
 .pcp-drawer-img-wrap {
   position: relative;
@@ -515,9 +520,14 @@
   flex-direction: column;
   gap: 20px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(0,0,0,0.1) transparent;
+  scrollbar-color: rgba(93,174,123,0.28) transparent;
   background: #fafafa;
 }
+
+.pcp-drawer-right::-webkit-scrollbar { width: 4px; }
+.pcp-drawer-right::-webkit-scrollbar-track { background: transparent; }
+.pcp-drawer-right::-webkit-scrollbar-thumb { background: rgba(93,174,123,0.3); border-radius: 100px; }
+.pcp-drawer-right::-webkit-scrollbar-thumb:hover { background: rgba(93,174,123,0.55); }
 
 /* Model Selector */
 .pcp-model-selector {
