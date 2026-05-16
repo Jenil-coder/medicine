@@ -75,11 +75,8 @@ const Products = () => {
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.65, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="hp-prod-footer-desc">
-            Explore our full catalogue of 16 product categories — from analytical instruments and lab automation to molecular biology reagents and water purification systems.
-          </p>
           <Link to="/products" className="hp-prod-explore-btn">
-            <span>Explore All 16 Product Categories</span>
+            <span>Explore All Product Categories</span>
             <ArrowRight size={18} />
           </Link>
         </motion.div>
