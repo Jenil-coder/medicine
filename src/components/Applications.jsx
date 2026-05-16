@@ -75,11 +75,8 @@ const Applications = () => {
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.65, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="app-desc">
-            From molecular diagnostics and cell biology to forensic science, lab automation, and turnkey lab design — end-to-end solutions across every laboratory discipline.
-          </p>
           <Link to="/applications" className="app-explore-btn">
-            <span>Explore All 15 Applications</span>
+            <span>Explore All Applications</span>
             <ArrowRight size={18} />
           </Link>
         </motion.div>
