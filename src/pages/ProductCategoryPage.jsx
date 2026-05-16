@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft, ArrowRight, X, CheckCircle2, Box,
-  ShoppingCart, Trash2, Plus, Minus, Send, ExternalLink
+  ShoppingCart, Trash2, Plus, Minus, Send, ExternalLink, Phone, User, Mail, MessageSquare
 } from 'lucide-react';
 import { productsData } from '../data/productsData';
 import './ProductCategoryPage.css';
@@ -67,6 +67,8 @@ const QuoteCartPanel = ({ cart, onUpdateQty, onRemove, onClose, onSubmit }) => {
 /* ── Family Drawer ── */
 const FamilyDrawer = ({ family, category, quoteCart, quantities, addedItem, onClose, onAddToQuote, onQuantityChange, onViewCart, totalCartItems }) => {
   const [activeModelIdx, setActiveModelIdx] = useState(0);
+  const [askName, setAskName] = useState('');
+  const [askEmail, setAskEmail] = useState('');
   const [askMessage, setAskMessage] = useState('');
   const activeModel = family.models[activeModelIdx];
 
@@ -230,7 +232,7 @@ const FamilyDrawer = ({ family, category, quoteCart, quantities, addedItem, onCl
                         </div>
                         <div className="pcp-qb-product-text">
                           <span className="pcp-qb-product-name">{product}</span>
-                          {inCart && <span className="pcp-qb-in-cart-tag">In Quote</span>}
+                          <span className="pcp-qb-unit-label">{inCart ? <span className="pcp-qb-in-cart-tag">In Quote</span> : <span className="pcp-qb-unit">Unit</span>}</span>
                         </div>
                       </div>
                       <div className="pcp-qb-actions">
@@ -264,26 +266,58 @@ const FamilyDrawer = ({ family, category, quoteCart, quantities, addedItem, onCl
               )}
             </div>
 
-            {/* Ask About This + Technical Support */}
+            {/* Enquiry Form + Technical Support */}
             <div className="pcp-drawer-contact">
               <div className="pcp-ask-block" style={{ borderColor: `${category.color}30` }}>
                 <span className="pcp-ask-label" style={{ color: category.color }}>Ask About This Product</span>
-                <textarea
-                  className="pcp-ask-input"
-                  placeholder="Type your question about this product…"
-                  value={askMessage}
-                  onChange={e => setAskMessage(e.target.value)}
-                  rows={3}
-                />
+
+                <div className="pcp-ask-field">
+                  <div className="pcp-ask-field-icon"><User size={13} /></div>
+                  <input
+                    className="pcp-ask-input-field"
+                    type="text"
+                    placeholder="Your Name"
+                    value={askName}
+                    onChange={e => setAskName(e.target.value)}
+                  />
+                </div>
+
+                <div className="pcp-ask-field">
+                  <div className="pcp-ask-field-icon"><Mail size={13} /></div>
+                  <input
+                    className="pcp-ask-input-field"
+                    type="email"
+                    placeholder="Email Address"
+                    value={askEmail}
+                    onChange={e => setAskEmail(e.target.value)}
+                  />
+                </div>
+
+                <div className="pcp-ask-field pcp-ask-field--textarea">
+                  <div className="pcp-ask-field-icon pcp-ask-field-icon--top"><MessageSquare size={13} /></div>
+                  <textarea
+                    className="pcp-ask-input-field pcp-ask-textarea"
+                    placeholder="Describe your requirement, quantity needed, or any questions…"
+                    value={askMessage}
+                    onChange={e => setAskMessage(e.target.value)}
+                    rows={3}
+                  />
+                </div>
+
                 <a
-                  href={`mailto:info@inventasystems.in?subject=${enquirySubject}&body=${encodeURIComponent(askMessage || enquiryBody)}`}
+                  href={`mailto:info@inventasystems.in?subject=${enquirySubject}&body=${encodeURIComponent(`Name: ${askName}\nEmail: ${askEmail}\n\nMessage:\n${askMessage || `I would like to enquire about the ${family.name} (${activeModel.name}).`}`)}`}
                   className="pcp-ask-submit"
                   style={{ background: category.color }}
                 >
+                  <Send size={14} />
                   Send Enquiry
                 </a>
               </div>
-              <Link to="/contact" className="pcp-support-link">Technical Support →</Link>
+
+              <a href="tel:+918734013927" className="pcp-support-call-btn">
+                <Phone size={15} />
+                Call Technical Support
+              </a>
             </div>
 
           </div>

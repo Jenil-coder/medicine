@@ -724,6 +724,19 @@
   letter-spacing: 0.08em;
 }
 
+.pcp-qb-unit-label {
+  display: flex;
+  align-items: center;
+}
+
+.pcp-qb-unit {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
 .pcp-qb-actions {
   display: flex;
   align-items: center;
@@ -822,45 +835,80 @@
 }
 
 .pcp-ask-label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  margin-bottom: 2px;
 }
 
-.pcp-ask-input {
-  width: 100%;
+/* Form fields with icon */
+.pcp-ask-field {
+  display: flex;
+  align-items: center;
+  gap: 0;
   border: 1.5px solid rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  padding: 10px 12px;
-  font-size: 0.83rem;
-  font-family: inherit;
-  color: var(--text-main);
   background: #f8f9f7;
-  resize: none;
-  outline: none;
-  transition: border-color 0.2s ease;
-  line-height: 1.55;
-  box-sizing: border-box;
+  overflow: hidden;
+  transition: border-color 0.2s ease, background 0.2s ease;
 }
 
-.pcp-ask-input:focus {
-  border-color: currentColor;
+.pcp-ask-field:focus-within {
+  border-color: rgba(0, 0, 0, 0.28);
   background: #fff;
 }
 
-.pcp-ask-input::placeholder {
-  color: #aaa;
+.pcp-ask-field--textarea {
+  align-items: flex-start;
+}
+
+.pcp-ask-field-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  flex-shrink: 0;
+  color: #bbb;
+  padding-top: 0;
+}
+
+.pcp-ask-field-icon--top {
+  padding-top: 10px;
+  align-self: flex-start;
+}
+
+.pcp-ask-input-field {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 10px 10px 10px 0;
+  font-size: 0.82rem;
+  font-family: inherit;
+  color: var(--text-main);
+  outline: none;
+  line-height: 1.5;
+  width: 100%;
+}
+
+.pcp-ask-input-field::placeholder {
+  color: #bbb;
+}
+
+.pcp-ask-textarea {
+  resize: none;
+  padding-top: 10px;
 }
 
 .pcp-ask-submit {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 7px;
   text-decoration: none;
   border: none;
   border-radius: 8px;
-  padding: 10px 16px;
+  padding: 11px 16px;
   font-size: 0.83rem;
   font-weight: 700;
   font-family: inherit;
@@ -875,17 +923,31 @@
   transform: translateY(-1px);
 }
 
-.pcp-support-link {
-  text-align: center;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #888;
+/* Call Technical Support button */
+.pcp-support-call-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   text-decoration: none;
-  padding: 6px 0;
-  transition: color 0.2s ease;
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 0.83rem;
+  font-weight: 700;
+  font-family: inherit;
+  color: #444;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
-.pcp-support-link:hover { color: var(--text-main); }
+.pcp-support-call-btn:hover {
+  border-color: #22c55e;
+  color: #16a34a;
+  background: #f0fdf4;
+  transform: translateY(-1px);
+}
 
 /* ── Quote Cart Panel ── */
 .pcp-cart-overlay {
