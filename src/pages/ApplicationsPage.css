@@ -949,6 +949,131 @@
 }
 
 /* =============================================
+   ENQUIRY FORM (inside modal right column)
+   ============================================= */
+
+.corp-ask-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1.5px solid;
+  border-radius: 16px;
+  padding: 18px;
+  background: #fff;
+}
+
+.corp-ask-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.corp-ask-field {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background: #f8f9f7;
+  overflow: hidden;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.corp-ask-field:focus-within {
+  border-color: rgba(0, 0, 0, 0.28);
+  background: #fff;
+}
+
+.corp-ask-field--textarea {
+  align-items: flex-start;
+}
+
+.corp-ask-field-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  flex-shrink: 0;
+  color: #bbb;
+}
+
+.corp-ask-field-icon--top {
+  padding-top: 10px;
+  align-self: flex-start;
+}
+
+.corp-ask-input-field {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 10px 10px 10px 0;
+  font-size: 0.82rem;
+  font-family: inherit;
+  color: #111;
+  outline: none;
+  line-height: 1.5;
+  width: 100%;
+}
+
+.corp-ask-input-field::placeholder {
+  color: #bbb;
+}
+
+.corp-ask-textarea {
+  resize: none;
+  padding-top: 10px;
+}
+
+.corp-ask-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  text-decoration: none;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: inherit;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.corp-ask-submit:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.corp-support-call-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: inherit;
+  color: #444;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.corp-support-call-btn:hover {
+  border-color: #22c55e;
+  color: #16a34a;
+  background: #f0fdf4;
+  transform: translateY(-1px);
+}
+
+/* =============================================
    QUOTE CART SIDE PANEL
    ============================================= */
 

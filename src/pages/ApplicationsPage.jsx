@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight, X,
-  CheckCircle2, Box, ShoppingCart, Trash2, Plus, Minus, Send
+  CheckCircle2, Box, ShoppingCart, Trash2, Plus, Minus, Send, Phone, User, Mail, MessageSquare
 } from 'lucide-react';
 import { applicationsData } from '../data/applicationsData';
 import './ApplicationsPage.css';
@@ -72,7 +72,10 @@ const ApplicationsPage = () => {
   const [quoteCart, setQuoteCart] = useState([]);
   const [quantities, setQuantities] = useState({});
   const [showCart, setShowCart] = useState(false);
-  const [addedItem, setAddedItem] = useState(null); // for toast feedback
+  const [addedItem, setAddedItem] = useState(null);
+  const [askName, setAskName] = useState('');
+  const [askEmail, setAskEmail] = useState('');
+  const [askMessage, setAskMessage] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -94,6 +97,10 @@ const ApplicationsPage = () => {
     document.body.style.overflow = (selectedWorkflow || showCart) ? 'hidden' : 'unset';
     return () => { document.body.style.overflow = 'unset'; };
   }, [selectedWorkflow, showCart]);
+
+  useEffect(() => {
+    if (selectedWorkflow) { setAskName(''); setAskEmail(''); setAskMessage(''); }
+  }, [selectedWorkflow]);
 
   const scrollToSection = (e, id) => {
     e.preventDefault();
@@ -304,14 +311,57 @@ const ApplicationsPage = () => {
                     )}
                   </div>
 
-                  {/* Contact CTA */}
-                  <div className="corp-cta-box" style={{ background: `${selectedWorkflow.appColor}08`, borderColor: `${selectedWorkflow.appColor}20`, marginTop: '20px' }}>
-                    <h4>Technical Support</h4>
-                    <p>Speak with an applications specialist about this workflow.</p>
-                    <Link to="/contact" className="corp-btn-outline-modal" style={{ color: selectedWorkflow.appColor, borderColor: selectedWorkflow.appColor }}>
-                      Contact a Specialist
-                    </Link>
+                  {/* Enquiry Form */}
+                  <div className="corp-ask-block" style={{ borderColor: `${selectedWorkflow.appColor}30` }}>
+                    <span className="corp-ask-label" style={{ color: selectedWorkflow.appColor }}>Ask About This Application</span>
+
+                    <div className="corp-ask-field">
+                      <div className="corp-ask-field-icon"><User size={13} /></div>
+                      <input
+                        className="corp-ask-input-field"
+                        type="text"
+                        placeholder="Your Name"
+                        value={askName}
+                        onChange={e => setAskName(e.target.value)}
+                      />
+                    </div>
+
+                    <div className="corp-ask-field">
+                      <div className="corp-ask-field-icon"><Mail size={13} /></div>
+                      <input
+                        className="corp-ask-input-field"
+                        type="email"
+                        placeholder="Email Address"
+                        value={askEmail}
+                        onChange={e => setAskEmail(e.target.value)}
+                      />
+                    </div>
+
+                    <div className="corp-ask-field corp-ask-field--textarea">
+                      <div className="corp-ask-field-icon corp-ask-field-icon--top"><MessageSquare size={13} /></div>
+                      <textarea
+                        className="corp-ask-input-field corp-ask-textarea"
+                        placeholder="Describe your requirement or any questions about this application…"
+                        value={askMessage}
+                        onChange={e => setAskMessage(e.target.value)}
+                        rows={3}
+                      />
+                    </div>
+
+                    <a
+                      href={`mailto:info@inventasystems.in?subject=${encodeURIComponent('Application Enquiry: ' + selectedWorkflow.title + ' — ' + selectedWorkflow.appCategory)}&body=${encodeURIComponent('Name: ' + askName + '\nEmail: ' + askEmail + '\n\nMessage:\n' + (askMessage || 'I would like to enquire about the ' + selectedWorkflow.title + ' application.'))}`}
+                      className="corp-ask-submit"
+                      style={{ background: selectedWorkflow.appColor }}
+                    >
+                      <Send size={14} />
+                      Send Enquiry
+                    </a>
                   </div>
+
+                  <a href="tel:+918734013927" className="corp-support-call-btn">
+                    <Phone size={15} />
+                    Call Technical Support
+                  </a>
 
                 </div>
               </div>
