@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight, X,
@@ -68,6 +68,7 @@ const QuoteCartPanel = ({ cart, onUpdateQty, onRemove, onClose, onSubmit }) => {
 // ── Main Page Component ──
 const ApplicationsPage = () => {
   const [activeSection, setActiveSection] = useState(applicationsData[0].id);
+  const sidebarItemRefs = useRef({});
   const [selectedWorkflow, setSelectedWorkflow] = useState(null);
   const [quoteCart, setQuoteCart] = useState([]);
   const [quantities, setQuantities] = useState({});
@@ -101,6 +102,11 @@ const ApplicationsPage = () => {
   useEffect(() => {
     if (selectedWorkflow) { setAskName(''); setAskEmail(''); setAskMessage(''); }
   }, [selectedWorkflow]);
+
+  useEffect(() => {
+    const el = sidebarItemRefs.current[activeSection];
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, [activeSection]);
 
   const scrollToSection = (e, id) => {
     e.preventDefault();
@@ -164,6 +170,7 @@ const ApplicationsPage = () => {
                   <li key={app.id}>
                     <a
                       href={`#${app.id}`}
+                      ref={el => sidebarItemRefs.current[app.id] = el}
                       className={activeSection === app.id ? 'active' : ''}
                       onClick={(e) => scrollToSection(e, app.id)}
                       style={activeSection === app.id ? { '--active-color': app.color } : {}}
