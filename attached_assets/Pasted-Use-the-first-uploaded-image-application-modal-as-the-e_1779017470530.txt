@@ -1,0 +1,42 @@
+Use the first uploaded image (application modal) as the exact UI/UX reference for how product details should be displayed. Redesign the product cards section so that when a user clicks any product category or product card, a large professional modal opens with the same layout and styling as the reference modal.
+
+Design Requirements
+Keep the overall layout identical to the first image:
+Large modal with rounded corners.
+Header containing category label, product title, and close icon.
+Left side: large product banner image, overview, specifications, and description.
+Right side: “Build Your Quote” sidebar with product list, quantity selectors, and “Add to Quote” buttons.
+Maintain the same spacing, padding, typography, border styles, and shadows.
+Use the same premium scientific/laboratory design language.
+Product Grid Behavior
+
+In the second image, the right side currently shows separate product cards. Replace this behavior so that:
+
+Each product card acts as a preview card only.
+Clicking a card opens the detailed modal.
+The modal displays all related models/products in the right-hand quote panel, exactly like the application modal.
+Banner image, overview, and specifications remain on the left side.
+Quote builder remains sticky on the right side.
+Visual Consistency
+Use the same large banner image ratio as the application modal.
+Keep the same blue/green category label styling.
+Use identical “Add to Quote” button style.
+Use the same quantity selector UI.
+Preserve the same modal width and two-column layout.
+Ensure the product section and application section feel like one unified design system.
+Functional Requirements
+Product card click → opens modal.
+Modal shows:
+Product category
+Product title
+Product image
+Overview
+Specifications
+Related models
+Quantity selector
+Add to Quote buttons
+“View All Models” opens full related model list.
+Responsive design for desktop, tablet, and mobile.
+Goal
+
+The product section must visually match the application detail modal exactly, using the same banner design, two-column structure, and quote builder layout so both Applications and Products provide a consistent user experience.
