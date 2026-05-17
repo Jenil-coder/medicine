@@ -17,7 +17,9 @@
 
 /* ── Section Header ── */
 .hp-prod-header {
-  margin-bottom: 48px;
+  max-width: 900px;
+  margin: 0 auto 48px;
+  text-align: center;
 }
 
 .hp-prod-kicker {
@@ -26,8 +28,9 @@
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--accent);
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 14px;
   margin-bottom: 16px;
 }
@@ -47,8 +50,16 @@
   font-weight: 800;
   letter-spacing: -0.04em;
   color: var(--text-main);
-  margin: 0;
+  margin: 0 auto;
   line-height: 1.1;
+}
+
+.hp-prod-subtitle {
+  font-size: var(--size-step-0);
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin: 16px auto 0;
+  max-width: 680px;
 }
 
 /* ── Featured 3-Card Grid ── */

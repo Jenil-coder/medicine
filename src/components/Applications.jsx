@@ -22,6 +22,7 @@ const Applications = () => {
         >
           <span className="app-kicker">Our Applications</span>
           <h2 className="app-headline">Solutions for every scientific challenge.</h2>
+          <p className="app-subtitle">From molecular diagnostics and cell biology to forensic science and lab automation — end-to-end solutions across every laboratory discipline.</p>
         </motion.div>
 
         {/* 3 featured cards */}

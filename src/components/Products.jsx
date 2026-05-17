@@ -22,6 +22,7 @@ const Products = () => {
         >
           <span className="hp-prod-kicker">Our Products</span>
           <h2 className="hp-prod-headline">Precision instruments for every discipline.</h2>
+          <p className="hp-prod-subtitle">From analytical instruments and lab automation to molecular biology reagents and water purification systems — a complete catalogue for every lab need.</p>
         </motion.div>
 
         {/* 3 Featured Product Category Cards */}
