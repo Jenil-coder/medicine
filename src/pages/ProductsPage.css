@@ -3,50 +3,61 @@
    ============================================= */
 
 .pp-page {
-  background: var(--bg-secondary, #f8f9f7);
+  background: var(--bg-color, #f5f7f5);
   min-height: 100vh;
-  padding-top: var(--nav-height, 80px);
   color: var(--text-main);
   font-family: var(--font-body);
 }
 
 /* ── Page Header ── */
 .pp-page-header {
-  background: var(--text-main);
-  padding: 0;
+  padding: 130px 5% 56px;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-color, #f5f7f5);
 }
 
 .pp-header-inner {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 60px 5% 56px;
+  position: relative;
+  z-index: 1;
 }
 
 .pp-kicker {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #5DAE7B;
+  font-weight: 600;
   text-transform: uppercase;
-  color: var(--accent);
-  display: block;
-  margin-bottom: 14px;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  margin-bottom: 16px;
+}
+
+.pp-kicker::before {
+  content: '';
+  width: 28px;
+  height: 2px;
+  background: #5DAE7B;
 }
 
 .pp-header-inner h1 {
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  color: #fff;
-  margin: 0 0 14px;
-  line-height: 1.1;
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.03em;
 }
 
 .pp-header-inner p {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.65);
+  font-size: 1.02rem;
+  color: #666;
+  max-width: 600px;
+  line-height: 1.7;
   margin: 0;
-  line-height: 1.6;
-  max-width: 560px;
 }
 
 /* ── Two-column layout ── */
