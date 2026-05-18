@@ -219,6 +219,24 @@ const FamilyModal = ({ family, category, quoteCart, quantities, addedItem, onClo
                   </div>
                 </div>
 
+                {/* Model-level Qty + Add to Quote */}
+                <div className="pcp-model-cta">
+                  <div className="pcp-model-cta-qty">
+                    <button onClick={() => onQuantityChange(activeModel.name, -1)}><Minus size={13} /></button>
+                    <span>{quantities[activeModel.name] || 1}</span>
+                    <button onClick={() => onQuantityChange(activeModel.name, 1)}><Plus size={13} /></button>
+                  </div>
+                  <button
+                    className={`pcp-model-cta-btn ${addedItem === activeModel.name ? 'added' : ''}`}
+                    style={{ background: addedItem === activeModel.name ? '#10B981' : category.color }}
+                    onClick={() => onAddToQuote(activeModel.name, category.title)}
+                  >
+                    {addedItem === activeModel.name
+                      ? <><CheckCircle2 size={14} /> Added to Quote</>
+                      : <><ShoppingCart size={14} /> Add to Quote</>}
+                  </button>
+                </div>
+
                 {/* Qty + Add to Quote — one row per related product */}
                 <div className="pcp-modal-quote-rows">
                   {activeModel.relatedProducts.map((product, idx) => {
