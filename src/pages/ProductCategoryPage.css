@@ -913,9 +913,9 @@
 }
 
 .pcp-qb-view-quote:hover {
-  background: currentColor;
+  background: var(--cat-color);
   color: #fff;
-  filter: brightness(0) invert(1);
+  border-color: var(--cat-color);
 }
 
 /* Contact section */
