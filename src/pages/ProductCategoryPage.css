@@ -204,7 +204,7 @@
   flex: 1;
 }
 
-.pcp-fc-body-main { flex: 1; }
+.pcp-fc-body-main { }
 
 .pcp-fc-name {
   font-size: 1.05rem;
@@ -251,6 +251,7 @@
   font-family: inherit;
   transition: all 0.2s ease;
   align-self: flex-start;
+  margin-top: auto;
 }
 
 .pcp-fc-view-btn:hover {
