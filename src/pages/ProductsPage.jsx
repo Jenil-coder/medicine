@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { productsData } from '../data/productsData';
 import './ProductsPage.css';
+import './ProductCategoryPage.css';
 
 /* ── Quote Cart Panel ── */
 const QuoteCartPanel = ({ cart, onUpdateQty, onRemove, onClose, onSubmit }) => {
@@ -65,11 +66,8 @@ const QuoteCartPanel = ({ cart, onUpdateQty, onRemove, onClose, onSubmit }) => {
   );
 };
 
-/* ── Product Family Modal ── */
-const ProductFamilyModal = ({
-  family, category, quoteCart, quantities, addedItem,
-  onClose, onAddToQuote, onQuantityChange, onViewCart, totalCartItems
-}) => {
+/* ── Product Family Modal (identical to Explore Category modal) ── */
+const ProductFamilyModal = ({ family, category, quoteCart, quantities, addedItem, onClose, onAddToQuote, onQuantityChange, onViewCart, totalCartItems }) => {
   const [activeModelIdx, setActiveModelIdx] = useState(0);
   const [askName, setAskName] = useState('');
   const [askEmail, setAskEmail] = useState('');
@@ -90,12 +88,10 @@ const ProductFamilyModal = ({
   }, [family.id]);
 
   const enquirySubject = encodeURIComponent(`Product Enquiry: ${family.name} — ${category.title}`);
-  const enquiryBody = encodeURIComponent(`Name: ${askName}\nEmail: ${askEmail}\n\nMessage:\n${askMessage || `I would like to enquire about the ${family.name} (${activeModel.name}).`}`);
-  const CatIcon = category.icon;
 
   return (
     <motion.div
-      className="pp-modal-backdrop"
+      className="pcp-modal-overlay"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -103,240 +99,200 @@ const ProductFamilyModal = ({
       onClick={onClose}
     >
       <motion.div
-        className="pp-modal"
-        initial={{ opacity: 0, y: 32, scale: 0.97 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 16, scale: 0.98 }}
-        transition={{ type: 'spring', damping: 28, stiffness: 300 }}
+        className="pcp-modal"
+        initial={{ opacity: 0, scale: 0.96, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.96, y: 12 }}
+        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="pp-modal-header">
-          <div className="pp-modal-header-left">
-            <span className="pp-modal-kicker" style={{ color: category.color, background: `${category.color}14` }}>
-              <CatIcon size={12} />
+        <div className="pcp-modal-header">
+          <div className="pcp-modal-header-left">
+            <span className="pcp-drawer-kicker" style={{ color: category.color, background: `${category.color}12` }}>
               {category.shortTitle}
             </span>
-            <h2 className="pp-modal-title">{family.name}</h2>
+            <h2 className="pcp-drawer-title">{family.name}</h2>
           </div>
-          <button className="pp-modal-close" onClick={onClose}><X size={18} /></button>
+          <button className="pcp-drawer-close" onClick={onClose}><X size={20} /></button>
         </div>
 
-        {/* Body */}
-        <div className="pp-modal-body">
+        {/* Two-column body */}
+        <div className="pcp-modal-body">
 
-          {/* LEFT — Image + Overview + Features */}
-          <div className="pp-modal-left">
-            <div className="pp-modal-banner-wrap">
-              <img src={family.image} alt={family.name} className="pp-modal-banner" />
-              <div className="pp-modal-banner-overlay" style={{ background: `linear-gradient(to top, ${category.color}99 0%, transparent 55%)` }} />
+          {/* LEFT — Image + Overview + Specs */}
+          <div className="pcp-modal-left">
+            <div className="pcp-drawer-img-wrap">
+              <img src={family.image} alt={family.name} className="pcp-drawer-img" />
+              <div className="pcp-drawer-img-overlay" style={{ background: `linear-gradient(to top, ${category.color}99 0%, transparent 60%)` }} />
             </div>
 
-            <div className="pp-modal-left-content">
-              <div className="pp-modal-section">
-                <h4 className="pp-modal-section-title" style={{ color: category.color }}>
-                  <span className="pp-modal-section-bar" style={{ background: category.color }} />
-                  Product Overview
-                </h4>
-                <p className="pp-modal-desc">{family.description}</p>
-                {family.extendedDescription && (
-                  <p className="pp-modal-ext-desc">{family.extendedDescription}</p>
-                )}
-              </div>
-
-              <div className="pp-modal-section">
-                <h4 className="pp-modal-section-title" style={{ color: category.color }}>
-                  <span className="pp-modal-section-bar" style={{ background: category.color }} />
-                  System Specifications
-                </h4>
-                <ul className="pp-modal-features">
-                  {family.keyFeatures.map((f, i) => (
-                    <li key={i}>
-                      <CheckCircle2 size={14} style={{ color: category.color, flexShrink: 0 }} />
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {family.relatedApplications && family.relatedApplications.length > 0 && (
-                <div className="pp-modal-section">
-                  <h4 className="pp-modal-section-title" style={{ color: category.color }}>
-                    <span className="pp-modal-section-bar" style={{ background: category.color }} />
-                    Related Applications
-                  </h4>
-                  <div className="pp-modal-app-tags">
-                    {family.relatedApplications.map(appId => (
-                      <Link
-                        key={appId}
-                        to={`/applications/${appId}`}
-                        className="pp-modal-app-tag"
-                        style={{ color: category.color, borderColor: `${category.color}30`, background: `${category.color}08` }}
-                        onClick={onClose}
-                      >
-                        <ExternalLink size={11} />
-                        {appId.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
+            <div className="pcp-modal-section">
+              <h4 className="pcp-modal-section-title">
+                <span className="pcp-modal-section-bar" style={{ background: category.color }} />
+                <span style={{ color: category.color }}>Product Overview</span>
+              </h4>
+              <p className="pcp-drawer-desc">{family.description}</p>
+              <p className="pcp-drawer-ext-desc">{family.extendedDescription}</p>
             </div>
-          </div>
 
-          {/* RIGHT — Model Selector + Specs + Quote Builder + Enquiry */}
-          <div className="pp-modal-right">
+            <div className="pcp-modal-section">
+              <h4 className="pcp-modal-section-title">
+                <span className="pcp-modal-section-bar" style={{ background: category.color }} />
+                <span style={{ color: category.color }}>System Specifications</span>
+              </h4>
+              <ul className="pcp-drawer-feature-list">
+                {family.keyFeatures.map((f, i) => (
+                  <li key={i}>
+                    <CheckCircle2 size={15} style={{ color: category.color, flexShrink: 0 }} />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-            {/* Model Selector */}
-            {family.models.length > 1 && (
-              <div className="pp-modal-model-selector">
-                <span className="pp-modal-model-label">Select Model</span>
-                <div className="pp-modal-model-tabs">
-                  {family.models.map((model, i) => (
-                    <button
-                      key={model.id}
-                      className={`pp-modal-model-tab ${i === activeModelIdx ? 'is-active' : ''}`}
-                      style={i === activeModelIdx ? { background: category.color, borderColor: category.color } : {}}
-                      onClick={() => setActiveModelIdx(i)}
-                    >
-                      {model.name}
-                      <span className={`pp-modal-model-tier ${model.tier.toLowerCase()}`}>{model.tier}</span>
-                    </button>
+            {family.relatedApplications && family.relatedApplications.length > 0 && (
+              <div className="pcp-modal-section">
+                <h4 className="pcp-modal-section-title">
+                  <span className="pcp-modal-section-bar" style={{ background: category.color }} />
+                  <span style={{ color: category.color }}>Related Applications</span>
+                </h4>
+                <div className="pcp-related-apps">
+                  {family.relatedApplications.map(appId => (
+                    <Link key={appId} to={`/applications/${appId}`} className="pcp-app-tag" style={{ color: category.color, borderColor: `${category.color}35`, background: `${category.color}08` }} onClick={onClose}>
+                      <ExternalLink size={11} />
+                      {appId.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
+                    </Link>
                   ))}
                 </div>
               </div>
             )}
+          </div>
 
-            {/* Specs Table */}
+          {/* RIGHT — Model Selector + Specs + Qty/Quote + Enquiry */}
+          <div className="pcp-modal-right">
+
+            {/* Model Selector */}
+            <div className="pcp-model-selector">
+              <span className="pcp-model-selector-label">Select Model</span>
+              <div className="pcp-model-tabs">
+                {family.models.map((model, i) => (
+                  <button
+                    key={model.id}
+                    className={`pcp-model-tab ${i === activeModelIdx ? 'is-active' : ''}`}
+                    style={i === activeModelIdx ? { background: category.color, borderColor: category.color } : {}}
+                    onClick={() => setActiveModelIdx(i)}
+                  >
+                    {model.name}
+                    <span className={`pcp-model-tier ${model.tier.toLowerCase()}`}>{model.tier}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Specs + inline Qty/Add-to-Quote — updates on model switch */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeModel.id}
-                className="pp-modal-specs"
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.22 }}
+                style={{ display: 'flex', flexDirection: 'column', gap: 10 }}
               >
-                <h5 className="pp-modal-specs-title">{activeModel.name}</h5>
-                <table className="pp-modal-specs-table">
-                  <tbody>
-                    {Object.entries(activeModel.specs).map(([k, v]) => (
-                      <tr key={k}>
-                        <td className="pp-modal-spec-key">{k}</td>
-                        <td className="pp-modal-spec-val">{v}</td>
-                      </tr>
+                <div className="pcp-specs-block">
+                  <h4 className="pcp-specs-title">{activeModel.name} — Specifications</h4>
+                  <table className="pcp-specs-table">
+                    <tbody>
+                      {Object.entries(activeModel.specs).map(([k, v]) => (
+                        <tr key={k}>
+                          <td className="pcp-spec-key">{k}</td>
+                          <td className="pcp-spec-val">{v}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <div className="pcp-model-features">
+                    {activeModel.keyFeatures.map((f, i) => (
+                      <span key={i} className="pcp-model-feature-tag" style={{ background: `${category.color}10`, color: category.color }}>
+                        <CheckCircle2 size={11} />
+                        {f}
+                      </span>
                     ))}
-                  </tbody>
-                </table>
-                <div className="pp-modal-model-tags">
-                  {activeModel.keyFeatures.map((f, i) => (
-                    <span key={i} className="pp-modal-model-tag" style={{ background: `${category.color}12`, color: category.color }}>
-                      <CheckCircle2 size={10} />
-                      {f}
-                    </span>
-                  ))}
+                  </div>
+
+                  {/* Qty + Add to Quote — inside the specs card */}
+                  <div className="pcp-model-cta">
+                    <div className="pcp-model-cta-qty">
+                      <button onClick={() => onQuantityChange(activeModel.name, -1)}><Minus size={13} /></button>
+                      <span>{quantities[activeModel.name] || 1}</span>
+                      <button onClick={() => onQuantityChange(activeModel.name, 1)}><Plus size={13} /></button>
+                    </div>
+                    <button
+                      className={`pcp-model-cta-btn ${addedItem === activeModel.name ? 'added' : ''}`}
+                      style={{ background: addedItem === activeModel.name ? '#10B981' : category.color }}
+                      onClick={() => onAddToQuote(activeModel.name, category.title)}
+                    >
+                      {addedItem === activeModel.name
+                        ? <><CheckCircle2 size={14} /> Added to Quote</>
+                        : <><ShoppingCart size={14} /> Add to Quote</>}
+                    </button>
+                  </div>
                 </div>
+
+                {quoteCart.length > 0 && (
+                  <button
+                    className="pcp-qb-view-quote"
+                    style={{ borderColor: category.color, color: category.color, '--cat-color': category.color }}
+                    onClick={() => { onClose(); onViewCart(); }}
+                  >
+                    <ShoppingCart size={14} />
+                    View Quote ({totalCartItems} item{totalCartItems !== 1 ? 's' : ''})
+                  </button>
+                )}
               </motion.div>
             </AnimatePresence>
 
-            {/* Quote Builder */}
-            <div className="pp-modal-qb" style={{ borderColor: `${category.color}20` }}>
-              <div className="pp-modal-qb-header" style={{ background: `${category.color}0d` }}>
-                <ShoppingCart size={15} style={{ color: category.color }} />
-                <span>Build Your Quote</span>
-              </div>
-              <p className="pp-modal-qb-sub">Select products and quantities, then add to your quote request.</p>
+            {/* Enquiry Form */}
+            <div className="pcp-ask-block" style={{ borderColor: `${category.color}30` }}>
+              <span className="pcp-ask-label" style={{ color: category.color }}>Ask About This Product</span>
 
-              <div className="pp-modal-qb-items">
-                {activeModel.relatedProducts.map((product, idx) => {
-                  const qty = quantities[product] || 1;
-                  const isAdded = addedItem === product;
-                  const inCart = quoteCart.some(i => i.name === product);
-                  return (
-                    <div key={idx} className={`pp-modal-qb-row ${inCart ? 'in-cart' : ''}`}>
-                      <div className="pp-modal-qb-info">
-                        <div className="pp-modal-qb-icon" style={{ background: `${category.color}14`, color: category.color }}>
-                          <Box size={13} />
-                        </div>
-                        <div className="pp-modal-qb-text">
-                          <span className="pp-modal-qb-name">{product}</span>
-                          <span className="pp-modal-qb-unit">
-                            {inCart
-                              ? <span className="pp-modal-qb-in-cart">In Quote</span>
-                              : <span className="pp-modal-qb-unit-label">Unit</span>
-                            }
-                          </span>
-                        </div>
-                      </div>
-                      <div className="pp-modal-qb-actions">
-                        <div className="pp-modal-qb-qty">
-                          <button onClick={() => onQuantityChange(product, -1)}><Minus size={10} /></button>
-                          <span>{qty}</span>
-                          <button onClick={() => onQuantityChange(product, 1)}><Plus size={10} /></button>
-                        </div>
-                        <button
-                          className={`pp-modal-qb-add ${isAdded ? 'added' : ''}`}
-                          style={{ background: isAdded ? '#10B981' : category.color }}
-                          onClick={() => onAddToQuote(product, category.title)}
-                        >
-                          {isAdded ? <><CheckCircle2 size={12} /> Added!</> : <>Add to Quote</>}
-                        </button>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {quoteCart.length > 0 && (
-                <button
-                  className="pp-modal-qb-view"
-                  style={{ borderColor: category.color, color: category.color }}
-                  onClick={() => { onClose(); onViewCart(); }}
-                >
-                  <ShoppingCart size={13} />
-                  View Quote ({totalCartItems} item{totalCartItems !== 1 ? 's' : ''})
-                </button>
-              )}
-            </div>
-
-            {/* Enquiry Form + Support Call */}
-            <div className="pp-modal-enquiry" style={{ borderColor: `${category.color}25` }}>
-              <span className="pp-modal-enquiry-label" style={{ color: category.color }}>Ask About This Product</span>
-
-              <div className="pp-modal-field">
-                <div className="pp-modal-field-icon"><User size={13} /></div>
+              <div className="pcp-ask-field">
+                <div className="pcp-ask-field-icon"><User size={13} /></div>
                 <input
+                  className="pcp-ask-input-field"
                   type="text"
                   placeholder="Your Name"
-                  className="pp-modal-input"
                   value={askName}
                   onChange={e => setAskName(e.target.value)}
                 />
               </div>
-              <div className="pp-modal-field">
-                <div className="pp-modal-field-icon"><Mail size={13} /></div>
+
+              <div className="pcp-ask-field">
+                <div className="pcp-ask-field-icon"><Mail size={13} /></div>
                 <input
+                  className="pcp-ask-input-field"
                   type="email"
                   placeholder="Email Address"
-                  className="pp-modal-input"
                   value={askEmail}
                   onChange={e => setAskEmail(e.target.value)}
                 />
               </div>
-              <div className="pp-modal-field pp-modal-field--ta">
-                <div className="pp-modal-field-icon pp-modal-field-icon--top"><MessageSquare size={13} /></div>
+
+              <div className="pcp-ask-field pcp-ask-field--textarea">
+                <div className="pcp-ask-field-icon pcp-ask-field-icon--top"><MessageSquare size={13} /></div>
                 <textarea
-                  className="pp-modal-input pp-modal-textarea"
-                  placeholder="Describe your requirement or any questions…"
-                  rows={3}
+                  className="pcp-ask-input-field pcp-ask-textarea"
+                  placeholder="Describe your requirement, quantity needed, or any questions…"
                   value={askMessage}
                   onChange={e => setAskMessage(e.target.value)}
+                  rows={3}
                 />
               </div>
 
               <a
-                href={`mailto:info@inventasystems.in?subject=${enquirySubject}&body=${enquiryBody}`}
-                className="pp-modal-send-btn"
+                href={`mailto:info@inventasystems.in?subject=${enquirySubject}&body=${encodeURIComponent(`Name: ${askName}\nEmail: ${askEmail}\n\nMessage:\n${askMessage || `I would like to enquire about the ${family.name} (${activeModel.name}).`}`)}`}
+                className="pcp-ask-submit"
                 style={{ background: category.color }}
               >
                 <Send size={14} />
@@ -344,7 +300,7 @@ const ProductFamilyModal = ({
               </a>
             </div>
 
-            <a href="tel:+918734013927" className="pp-modal-call-btn">
+            <a href="tel:+918734013927" className="pcp-support-call-btn">
               <Phone size={15} />
               Call Technical Support
             </a>
