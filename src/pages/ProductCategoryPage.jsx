@@ -85,16 +85,14 @@ const FamilyModal = ({ family, category, quoteCart, quantities, addedItem, onClo
   const enquirySubject = encodeURIComponent(`Product Enquiry: ${family.name} — ${category.title}`);
 
   return (
-    <>
-      <motion.div
+    <motion.div
         className="pcp-modal-overlay"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.25 }}
         onClick={onClose}
-      />
-
+      >
       <motion.div
         className="pcp-modal"
         initial={{ opacity: 0, scale: 0.96, y: 20 }}
@@ -343,7 +341,7 @@ const FamilyModal = ({ family, category, quoteCart, quantities, addedItem, onClo
           </div>
         </div>
       </motion.div>
-    </>
+    </motion.div>
   );
 };
 
