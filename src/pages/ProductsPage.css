@@ -109,12 +109,19 @@
 
 .pp-sidebar-nav ul {
   list-style: none;
-  padding: 0 0 12px;
+  padding: 0;
   margin: 0;
   overflow-y: auto;
   flex: 1;
   scrollbar-width: thin;
   scrollbar-color: rgba(93,174,123,0.28) transparent;
+}
+
+.pp-sidebar-nav ul::after {
+  content: '';
+  display: block;
+  height: 32px;
+  flex-shrink: 0;
 }
 
 .pp-sidebar-nav ul::-webkit-scrollbar { width: 4px; }
