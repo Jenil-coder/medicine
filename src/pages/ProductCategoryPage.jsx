@@ -235,44 +235,6 @@ const FamilyModal = ({ family, category, quoteCart, quantities, addedItem, onClo
                   </button>
                 </div>
 
-                {/* Qty + Add to Quote — one row per related product */}
-                <div className="pcp-modal-quote-rows">
-                  {activeModel.relatedProducts.map((product, idx) => {
-                    const qty = quantities[product] || 1;
-                    const isAdded = addedItem === product;
-                    const inCart = quoteCart.some(i => i.name === product);
-                    return (
-                      <div key={idx} className={`pcp-qb-row ${inCart ? 'in-cart' : ''}`}>
-                        <div className="pcp-qb-product-info">
-                          <div className="pcp-qb-icon" style={{ background: `${category.color}14`, color: category.color }}>
-                            <Box size={14} />
-                          </div>
-                          <div className="pcp-qb-product-text">
-                            <span className="pcp-qb-product-name">{product}</span>
-                            <span className="pcp-qb-unit-label">
-                              {inCart ? <span className="pcp-qb-in-cart-tag">In Quote</span> : <span className="pcp-qb-unit">Unit</span>}
-                            </span>
-                          </div>
-                        </div>
-                        <div className="pcp-qb-actions">
-                          <div className="pcp-qb-qty">
-                            <button onClick={() => onQuantityChange(product, -1)}><Minus size={11} /></button>
-                            <span>{qty}</span>
-                            <button onClick={() => onQuantityChange(product, 1)}><Plus size={11} /></button>
-                          </div>
-                          <button
-                            className={`pcp-qb-add-btn ${isAdded ? 'added' : ''}`}
-                            style={{ background: isAdded ? '#10B981' : category.color }}
-                            onClick={() => onAddToQuote(product, category.title)}
-                          >
-                            {isAdded ? <><CheckCircle2 size={13} /> Added!</> : <>Add to Quote</>}
-                          </button>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
                 {quoteCart.length > 0 && (
                   <button
                     className="pcp-qb-view-quote"
