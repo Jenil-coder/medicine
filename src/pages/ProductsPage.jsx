@@ -530,54 +530,13 @@ const ProductsPage = () => {
                           ))}
                         </div>
 
-                        <ul className="pp-fc-features">
-                          {family.keyFeatures.slice(0, 3).map((f, i) => (
-                            <li key={i}>
-                              <CheckCircle2 size={13} style={{ color: cat.color, flexShrink: 0 }} />
-                              <span>{f}</span>
-                            </li>
-                          ))}
-                        </ul>
-
-                        <div className="pp-fc-actions">
-                          <div className="pp-fc-qty-row">
-                            {family.models[0].relatedProducts.slice(0, 1).map(product => {
-                              const qty = quantities[product] || 1;
-                              const isAdded = addedItem === product;
-                              const inCart = quoteCart.some(i => i.name === product);
-                              return (
-                                <div key={product} className={`pp-product-row ${inCart ? 'in-cart' : ''}`} onClick={e => e.stopPropagation()}>
-                                  <div className="pp-product-name-wrap">
-                                    <Box size={12} style={{ color: cat.color, flexShrink: 0 }} />
-                                    <span className="pp-product-name">{product}</span>
-                                    {inCart && <span className="pp-in-cart-tag">In Quote</span>}
-                                  </div>
-                                  <div className="pp-product-actions">
-                                    <div className="pp-qty-stepper">
-                                      <button onClick={() => handleQtyChange(product, -1)}><Minus size={10} /></button>
-                                      <span>{qty}</span>
-                                      <button onClick={() => handleQtyChange(product, 1)}><Plus size={10} /></button>
-                                    </div>
-                                    <button
-                                      className={`pp-add-btn ${isAdded ? 'added' : ''}`}
-                                      style={{ background: isAdded ? '#10B981' : cat.color }}
-                                      onClick={() => handleAddToQuote(product, cat.title)}
-                                    >
-                                      {isAdded ? <><CheckCircle2 size={12} /> Added!</> : <>Add to Quote</>}
-                                    </button>
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </div>
-                          <button
-                            className="pp-fc-view-link"
-                            style={{ color: cat.color, borderColor: `${cat.color}35` }}
-                            onClick={e => { e.stopPropagation(); openModal(family, cat); }}
-                          >
-                            View All Models <ArrowRight size={13} />
-                          </button>
-                        </div>
+                        <button
+                          className="pp-fc-view-btn"
+                          style={{ color: cat.color }}
+                          onClick={e => { e.stopPropagation(); openModal(family, cat); }}
+                        >
+                          View Detail <ArrowRight size={13} />
+                        </button>
                       </div>
                     </div>
                   ))}

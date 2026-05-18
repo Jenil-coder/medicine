@@ -336,14 +336,14 @@
 }
 
 .pp-fc-body {
-  padding: 18px;
+  padding: 18px 18px 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
 .pp-fc-name {
-  font-size: 0.95rem;
+  font-size: 0.97rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   margin: 0;
@@ -354,7 +354,7 @@
   font-size: 0.8rem;
   color: #888;
   margin: 0;
-  line-height: 1.45;
+  line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -370,136 +370,29 @@
 .pp-fc-chip {
   font-size: 0.68rem;
   font-weight: 600;
-  padding: 2px 8px;
+  padding: 3px 9px;
   border-radius: 100px;
   background: rgba(0,0,0,0.05);
   color: #666;
   border: 1px solid rgba(0,0,0,0.07);
 }
 
-.pp-fc-features {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.pp-fc-features li {
-  display: flex;
-  align-items: flex-start;
-  gap: 7px;
-  font-size: 0.77rem;
-  color: #555;
-  line-height: 1.4;
-}
-
-/* Product Row + Quote Actions */
-.pp-fc-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  border-top: 1px solid rgba(0,0,0,0.06);
-  padding-top: 10px;
-}
-
-.pp-fc-qty-row { display: flex; flex-direction: column; gap: 6px; }
-
-.pp-product-row {
-  background: rgba(0,0,0,0.025);
-  border-radius: 9px;
-  padding: 8px 10px;
-  border: 1px solid transparent;
-  transition: border-color 0.2s ease;
-}
-
-.pp-product-row.in-cart { border-color: rgba(16, 185, 129, 0.25); background: rgba(16,185,129,0.04); }
-
-.pp-product-name-wrap {
-  display: flex;
+.pp-fc-view-btn {
+  display: inline-flex;
   align-items: center;
-  gap: 7px;
-  margin-bottom: 7px;
-  flex-wrap: wrap;
-}
-
-.pp-product-name { font-size: 0.76rem; font-weight: 600; color: var(--text-main); flex: 1; }
-
-.pp-in-cart-tag {
-  font-size: 0.63rem;
+  gap: 5px;
+  font-size: 0.8rem;
   font-weight: 700;
-  color: #10B981;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.pp-product-actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.pp-qty-stepper {
-  display: flex;
-  align-items: center;
-  background: #fff;
-  border: 1px solid rgba(0,0,0,0.1);
-  border-radius: 7px;
-  overflow: hidden;
-}
-
-.pp-qty-stepper button {
   background: none;
   border: none;
-  width: 25px;
-  height: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: #555;
-}
-
-.pp-qty-stepper span { font-size: 0.78rem; font-weight: 700; min-width: 20px; text-align: center; }
-
-.pp-add-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: #fff;
-  border: none;
-  border-radius: 7px;
-  padding: 6px 11px;
+  padding: 0;
   cursor: pointer;
   font-family: inherit;
-  transition: opacity 0.2s ease;
+  transition: gap 0.2s ease;
 }
 
-.pp-add-btn:hover { opacity: 0.88; }
-.pp-add-btn.added { cursor: default; }
-
-.pp-fc-view-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-decoration: none;
-  border: 1.5px solid;
-  border-radius: 8px;
-  padding: 8px 12px;
-  transition: background 0.2s ease, color 0.2s ease;
-  justify-content: center;
-}
-
-.pp-fc-view-link:hover {
-  background: currentColor;
-  color: #fff;
-  filter: brightness(0) invert(1);
+.pp-fc-view-btn:hover {
+  gap: 8px;
 }
 
 /* ── Quote Cart ── */
