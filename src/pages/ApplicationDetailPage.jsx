@@ -148,7 +148,7 @@ const ApplicationDetailPage = () => {
               All Applications
             </Link>
             <span className="adp-breadcrumb-sep">/</span>
-            <span className="adp-breadcrumb-current" style={{ color: app.color }}>
+            <span className="adp-breadcrumb-current" style={{ color: '#fff', opacity: 0.85 }}>
               <AppIcon size={13} />
               {app.shortTitle}
             </span>
