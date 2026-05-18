@@ -82,19 +82,21 @@
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-radius: 20px;
-  padding: 24px 18px;
   border: 1px solid rgba(255,255,255,0.8);
   box-shadow: 0 1px 3px rgba(0,0,0,0.02);
   max-height: calc(100vh - 130px);
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(93,174,123,0.28) transparent;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-.corp-sidebar::-webkit-scrollbar { width: 4px; }
-.corp-sidebar::-webkit-scrollbar-track { background: transparent; }
-.corp-sidebar::-webkit-scrollbar-thumb { background: rgba(93,174,123,0.3); border-radius: 100px; }
-.corp-sidebar::-webkit-scrollbar-thumb:hover { background: rgba(93,174,123,0.55); }
+.corp-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: 24px 18px 0;
+}
 
 .corp-sidebar-title {
   font-family: var(--font-heading);
@@ -104,16 +106,26 @@
   color: #aaa;
   margin: 0 0 14px 10px;
   font-weight: 600;
+  flex-shrink: 0;
 }
 
 .corp-sidebar-nav ul {
   list-style: none;
-  padding: 0;
+  padding: 0 0 16px;
   margin: 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
+  overflow-y: auto;
+  flex: 1;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(93,174,123,0.28) transparent;
 }
+
+.corp-sidebar-nav ul::-webkit-scrollbar { width: 4px; }
+.corp-sidebar-nav ul::-webkit-scrollbar-track { background: transparent; }
+.corp-sidebar-nav ul::-webkit-scrollbar-thumb { background: rgba(93,174,123,0.3); border-radius: 100px; }
+.corp-sidebar-nav ul::-webkit-scrollbar-thumb:hover { background: rgba(93,174,123,0.55); }
 
 .corp-sidebar-nav a {
   display: flex;
