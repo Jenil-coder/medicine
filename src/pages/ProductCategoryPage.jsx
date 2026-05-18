@@ -65,7 +65,7 @@ const QuoteCartPanel = ({ cart, onUpdateQty, onRemove, onClose, onSubmit }) => {
 };
 
 /* ── Family Drawer ── */
-const FamilyDrawer = ({ family, category, quoteCart, quantities, addedItem, onClose, onAddToQuote, onQuantityChange, onViewCart, totalCartItems }) => {
+const FamilyModal = ({ family, category, quoteCart, quantities, addedItem, onClose, onAddToQuote, onQuantityChange, onViewCart, totalCartItems }) => {
   const [activeModelIdx, setActiveModelIdx] = useState(0);
   const [askName, setAskName] = useState('');
   const [askEmail, setAskEmail] = useState('');
@@ -83,31 +83,29 @@ const FamilyDrawer = ({ family, category, quoteCart, quantities, addedItem, onCl
   }, [family.id]);
 
   const enquirySubject = encodeURIComponent(`Product Enquiry: ${family.name} — ${category.title}`);
-  const enquiryBody = encodeURIComponent(`Hello,\n\nI would like to enquire about the ${family.name} (${activeModel.name}) from the ${category.title} category.\n\nPlease provide more information on pricing, availability, and technical specifications.\n\nThank you.`);
 
   return (
     <>
-      {/* Backdrop */}
       <motion.div
-        className="pcp-drawer-backdrop"
+        className="pcp-modal-overlay"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.25 }}
         onClick={onClose}
       />
 
-      {/* Drawer panel */}
       <motion.div
-        className="pcp-drawer"
-        initial={{ x: '100%' }}
-        animate={{ x: 0 }}
-        exit={{ x: '100%' }}
-        transition={{ type: 'spring', damping: 30, stiffness: 280 }}
+        className="pcp-modal"
+        initial={{ opacity: 0, scale: 0.96, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.96, y: 12 }}
+        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        onClick={e => e.stopPropagation()}
       >
-        {/* Drawer header */}
-        <div className="pcp-drawer-header" style={{ borderColor: `${category.color}20` }}>
-          <div className="pcp-drawer-header-left">
+        {/* Header */}
+        <div className="pcp-modal-header">
+          <div className="pcp-modal-header-left">
             <span className="pcp-drawer-kicker" style={{ color: category.color, background: `${category.color}12` }}>
               {category.shortTitle}
             </span>
@@ -116,23 +114,30 @@ const FamilyDrawer = ({ family, category, quoteCart, quantities, addedItem, onCl
           <button className="pcp-drawer-close" onClick={onClose}><X size={20} /></button>
         </div>
 
-        {/* Scrollable body */}
-        <div className="pcp-drawer-body">
+        {/* Two-column body */}
+        <div className="pcp-modal-body">
 
-          {/* LEFT — Description + Features */}
-          <div className="pcp-drawer-left">
+          {/* LEFT — Image + Overview + Specs */}
+          <div className="pcp-modal-left">
             <div className="pcp-drawer-img-wrap">
               <img src={family.image} alt={family.name} className="pcp-drawer-img" />
               <div className="pcp-drawer-img-overlay" style={{ background: `linear-gradient(to top, ${category.color}99 0%, transparent 60%)` }} />
             </div>
 
-            <div className="pcp-drawer-section">
+            <div className="pcp-modal-section">
+              <h4 className="pcp-modal-section-title">
+                <span className="pcp-modal-section-bar" style={{ background: category.color }} />
+                <span style={{ color: category.color }}>Product Overview</span>
+              </h4>
               <p className="pcp-drawer-desc">{family.description}</p>
               <p className="pcp-drawer-ext-desc">{family.extendedDescription}</p>
             </div>
 
-            <div className="pcp-drawer-section">
-              <h4 className="pcp-drawer-section-title" style={{ color: category.color }}>Key Features</h4>
+            <div className="pcp-modal-section">
+              <h4 className="pcp-modal-section-title">
+                <span className="pcp-modal-section-bar" style={{ background: category.color }} />
+                <span style={{ color: category.color }}>System Specifications</span>
+              </h4>
               <ul className="pcp-drawer-feature-list">
                 {family.keyFeatures.map((f, i) => (
                   <li key={i}>
@@ -144,8 +149,11 @@ const FamilyDrawer = ({ family, category, quoteCart, quantities, addedItem, onCl
             </div>
 
             {family.relatedApplications && family.relatedApplications.length > 0 && (
-              <div className="pcp-drawer-section">
-                <h4 className="pcp-drawer-section-title" style={{ color: category.color }}>Related Applications</h4>
+              <div className="pcp-modal-section">
+                <h4 className="pcp-modal-section-title">
+                  <span className="pcp-modal-section-bar" style={{ background: category.color }} />
+                  <span style={{ color: category.color }}>Related Applications</span>
+                </h4>
                 <div className="pcp-related-apps">
                   {family.relatedApplications.map(appId => (
                     <Link key={appId} to={`/applications/${appId}`} className="pcp-app-tag" style={{ color: category.color, borderColor: `${category.color}35`, background: `${category.color}08` }}>
@@ -158,10 +166,10 @@ const FamilyDrawer = ({ family, category, quoteCart, quantities, addedItem, onCl
             )}
           </div>
 
-          {/* RIGHT — Model Selector + Specs + Quote Builder */}
-          <div className="pcp-drawer-right">
+          {/* RIGHT — Model Selector + Specs + Qty/Quote + Enquiry */}
+          <div className="pcp-modal-right">
 
-            {/* Model Selector Tabs */}
+            {/* Model Selector */}
             <div className="pcp-model-selector">
               <span className="pcp-model-selector-label">Select Model</span>
               <div className="pcp-model-tabs">
@@ -179,146 +187,140 @@ const FamilyDrawer = ({ family, category, quoteCart, quantities, addedItem, onCl
               </div>
             </div>
 
-            {/* Specs Table */}
+            {/* Specs + inline Qty/Add-to-Quote — updates on model switch */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeModel.id}
-                className="pcp-specs-block"
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4 }}
-                transition={{ duration: 0.25 }}
+                transition={{ duration: 0.22 }}
+                style={{ display: 'flex', flexDirection: 'column', gap: 10 }}
               >
-                <h4 className="pcp-specs-title">{activeModel.name} — Specifications</h4>
-                <table className="pcp-specs-table">
-                  <tbody>
-                    {Object.entries(activeModel.specs).map(([k, v]) => (
-                      <tr key={k}>
-                        <td className="pcp-spec-key">{k}</td>
-                        <td className="pcp-spec-val">{v}</td>
-                      </tr>
+                <div className="pcp-specs-block">
+                  <h4 className="pcp-specs-title">{activeModel.name} — Specifications</h4>
+                  <table className="pcp-specs-table">
+                    <tbody>
+                      {Object.entries(activeModel.specs).map(([k, v]) => (
+                        <tr key={k}>
+                          <td className="pcp-spec-key">{k}</td>
+                          <td className="pcp-spec-val">{v}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <div className="pcp-model-features">
+                    {activeModel.keyFeatures.map((f, i) => (
+                      <span key={i} className="pcp-model-feature-tag" style={{ background: `${category.color}10`, color: category.color }}>
+                        <CheckCircle2 size={11} />
+                        {f}
+                      </span>
                     ))}
-                  </tbody>
-                </table>
-
-                <div className="pcp-model-features">
-                  {activeModel.keyFeatures.map((f, i) => (
-                    <span key={i} className="pcp-model-feature-tag" style={{ background: `${category.color}10`, color: category.color }}>
-                      <CheckCircle2 size={11} />
-                      {f}
-                    </span>
-                  ))}
+                  </div>
                 </div>
+
+                {/* Qty + Add to Quote — one row per related product */}
+                <div className="pcp-modal-quote-rows">
+                  {activeModel.relatedProducts.map((product, idx) => {
+                    const qty = quantities[product] || 1;
+                    const isAdded = addedItem === product;
+                    const inCart = quoteCart.some(i => i.name === product);
+                    return (
+                      <div key={idx} className={`pcp-qb-row ${inCart ? 'in-cart' : ''}`}>
+                        <div className="pcp-qb-product-info">
+                          <div className="pcp-qb-icon" style={{ background: `${category.color}14`, color: category.color }}>
+                            <Box size={14} />
+                          </div>
+                          <div className="pcp-qb-product-text">
+                            <span className="pcp-qb-product-name">{product}</span>
+                            <span className="pcp-qb-unit-label">
+                              {inCart ? <span className="pcp-qb-in-cart-tag">In Quote</span> : <span className="pcp-qb-unit">Unit</span>}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="pcp-qb-actions">
+                          <div className="pcp-qb-qty">
+                            <button onClick={() => onQuantityChange(product, -1)}><Minus size={11} /></button>
+                            <span>{qty}</span>
+                            <button onClick={() => onQuantityChange(product, 1)}><Plus size={11} /></button>
+                          </div>
+                          <button
+                            className={`pcp-qb-add-btn ${isAdded ? 'added' : ''}`}
+                            style={{ background: isAdded ? '#10B981' : category.color }}
+                            onClick={() => onAddToQuote(product, category.title)}
+                          >
+                            {isAdded ? <><CheckCircle2 size={13} /> Added!</> : <>Add to Quote</>}
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {quoteCart.length > 0 && (
+                  <button
+                    className="pcp-qb-view-quote"
+                    style={{ borderColor: category.color, color: category.color }}
+                    onClick={() => { onClose(); onViewCart(); }}
+                  >
+                    <ShoppingCart size={14} />
+                    View Quote ({totalCartItems} item{totalCartItems !== 1 ? 's' : ''})
+                  </button>
+                )}
               </motion.div>
             </AnimatePresence>
 
-            {/* Quote Builder */}
-            <div className="pcp-quote-builder" style={{ borderColor: `${category.color}20` }}>
-              <div className="pcp-qb-header" style={{ background: `${category.color}0e` }}>
-                <ShoppingCart size={16} style={{ color: category.color }} />
-                <h4>Build Your Quote</h4>
+            {/* Enquiry Form */}
+            <div className="pcp-ask-block" style={{ borderColor: `${category.color}30` }}>
+              <span className="pcp-ask-label" style={{ color: category.color }}>Ask About This Product</span>
+
+              <div className="pcp-ask-field">
+                <div className="pcp-ask-field-icon"><User size={13} /></div>
+                <input
+                  className="pcp-ask-input-field"
+                  type="text"
+                  placeholder="Your Name"
+                  value={askName}
+                  onChange={e => setAskName(e.target.value)}
+                />
               </div>
 
-              <div className="pcp-qb-products">
-                {activeModel.relatedProducts.map((product, idx) => {
-                  const qty = quantities[product] || 1;
-                  const isAdded = addedItem === product;
-                  const inCart = quoteCart.some(i => i.name === product);
-                  return (
-                    <div key={idx} className={`pcp-qb-row ${inCart ? 'in-cart' : ''}`}>
-                      <div className="pcp-qb-product-info">
-                        <div className="pcp-qb-icon" style={{ background: `${category.color}14`, color: category.color }}>
-                          <Box size={14} />
-                        </div>
-                        <div className="pcp-qb-product-text">
-                          <span className="pcp-qb-product-name">{product}</span>
-                          <span className="pcp-qb-unit-label">{inCart ? <span className="pcp-qb-in-cart-tag">In Quote</span> : <span className="pcp-qb-unit">Unit</span>}</span>
-                        </div>
-                      </div>
-                      <div className="pcp-qb-actions">
-                        <div className="pcp-qb-qty">
-                          <button onClick={() => onQuantityChange(product, -1)}><Minus size={11} /></button>
-                          <span>{qty}</span>
-                          <button onClick={() => onQuantityChange(product, 1)}><Plus size={11} /></button>
-                        </div>
-                        <button
-                          className={`pcp-qb-add-btn ${isAdded ? 'added' : ''}`}
-                          style={{ background: isAdded ? '#10B981' : category.color }}
-                          onClick={() => onAddToQuote(product, category.title)}
-                        >
-                          {isAdded ? <><CheckCircle2 size={13} /> Added!</> : <>Add to Quote</>}
-                        </button>
-                      </div>
-                    </div>
-                  );
-                })}
+              <div className="pcp-ask-field">
+                <div className="pcp-ask-field-icon"><Mail size={13} /></div>
+                <input
+                  className="pcp-ask-input-field"
+                  type="email"
+                  placeholder="Email Address"
+                  value={askEmail}
+                  onChange={e => setAskEmail(e.target.value)}
+                />
               </div>
 
-              {quoteCart.length > 0 && (
-                <button
-                  className="pcp-qb-view-quote"
-                  style={{ borderColor: category.color, color: category.color }}
-                  onClick={() => { onClose(); onViewCart(); }}
-                >
-                  <ShoppingCart size={14} />
-                  View Quote ({totalCartItems} item{totalCartItems !== 1 ? 's' : ''})
-                </button>
-              )}
-            </div>
-
-            {/* Enquiry Form + Technical Support */}
-            <div className="pcp-drawer-contact">
-              <div className="pcp-ask-block" style={{ borderColor: `${category.color}30` }}>
-                <span className="pcp-ask-label" style={{ color: category.color }}>Ask About This Product</span>
-
-                <div className="pcp-ask-field">
-                  <div className="pcp-ask-field-icon"><User size={13} /></div>
-                  <input
-                    className="pcp-ask-input-field"
-                    type="text"
-                    placeholder="Your Name"
-                    value={askName}
-                    onChange={e => setAskName(e.target.value)}
-                  />
-                </div>
-
-                <div className="pcp-ask-field">
-                  <div className="pcp-ask-field-icon"><Mail size={13} /></div>
-                  <input
-                    className="pcp-ask-input-field"
-                    type="email"
-                    placeholder="Email Address"
-                    value={askEmail}
-                    onChange={e => setAskEmail(e.target.value)}
-                  />
-                </div>
-
-                <div className="pcp-ask-field pcp-ask-field--textarea">
-                  <div className="pcp-ask-field-icon pcp-ask-field-icon--top"><MessageSquare size={13} /></div>
-                  <textarea
-                    className="pcp-ask-input-field pcp-ask-textarea"
-                    placeholder="Describe your requirement, quantity needed, or any questions…"
-                    value={askMessage}
-                    onChange={e => setAskMessage(e.target.value)}
-                    rows={3}
-                  />
-                </div>
-
-                <a
-                  href={`mailto:info@inventasystems.in?subject=${enquirySubject}&body=${encodeURIComponent(`Name: ${askName}\nEmail: ${askEmail}\n\nMessage:\n${askMessage || `I would like to enquire about the ${family.name} (${activeModel.name}).`}`)}`}
-                  className="pcp-ask-submit"
-                  style={{ background: category.color }}
-                >
-                  <Send size={14} />
-                  Send Enquiry
-                </a>
+              <div className="pcp-ask-field pcp-ask-field--textarea">
+                <div className="pcp-ask-field-icon pcp-ask-field-icon--top"><MessageSquare size={13} /></div>
+                <textarea
+                  className="pcp-ask-input-field pcp-ask-textarea"
+                  placeholder="Describe your requirement, quantity needed, or any questions…"
+                  value={askMessage}
+                  onChange={e => setAskMessage(e.target.value)}
+                  rows={3}
+                />
               </div>
 
-              <a href="tel:+918734013927" className="pcp-support-call-btn">
-                <Phone size={15} />
-                Call Technical Support
+              <a
+                href={`mailto:info@inventasystems.in?subject=${enquirySubject}&body=${encodeURIComponent(`Name: ${askName}\nEmail: ${askEmail}\n\nMessage:\n${askMessage || `I would like to enquire about the ${family.name} (${activeModel.name}).`}`)}`}
+                className="pcp-ask-submit"
+                style={{ background: category.color }}
+              >
+                <Send size={14} />
+                Send Enquiry
               </a>
             </div>
+
+            <a href="tel:+918734013927" className="pcp-support-call-btn">
+              <Phone size={15} />
+              Call Technical Support
+            </a>
 
           </div>
         </div>
@@ -479,10 +481,10 @@ const ProductCategoryPage = () => {
         </div>
       </section>
 
-      {/* ── Family Drawer ── */}
+      {/* ── Family Modal ── */}
       <AnimatePresence>
         {selectedFamily && (
-          <FamilyDrawer
+          <FamilyModal
             family={selectedFamily}
             category={category}
             quoteCart={quoteCart}
