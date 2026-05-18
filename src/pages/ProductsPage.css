@@ -76,7 +76,8 @@
   position: sticky;
   top: calc(var(--nav-height, 80px) + 24px);
   padding: 28px 0;
-  max-height: calc(100vh - var(--nav-height, 80px) - 48px);
+  min-height: 800px;
+  max-height: calc(100vh - var(--nav-height, 80px) - 16px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
