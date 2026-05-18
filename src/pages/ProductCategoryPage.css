@@ -379,11 +379,13 @@
 .pcp-drawer-kicker {
   display: inline-flex;
   align-items: center;
+  width: fit-content;
+  gap: 5px;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 3px 10px;
+  padding: 4px 10px 4px 8px;
   border-radius: 100px;
   margin-bottom: 8px;
 }
