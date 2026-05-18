@@ -684,15 +684,13 @@
   border-radius: 100px;
 }
 
-/* Model-level CTA: Qty + Add to Quote */
+/* Model-level CTA: Qty + Add to Quote — lives inside .pcp-specs-block */
 .pcp-model-cta {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 12px 14px;
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
 }
 
 .pcp-model-cta-qty {
