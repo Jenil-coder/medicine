@@ -240,9 +240,9 @@ const ApplicationsPage = () => {
                         <button
                           onClick={() => setSelectedWorkflow({ ...wf, appColor: app.color, appCategory: app.title })}
                           className="corp-wf-link"
-                          style={{ color: app.color, background: 'transparent', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', padding: 0, font: 'inherit' }}
+                          style={{ '--btn-color': app.color }}
                         >
-                          View Specifications <ArrowRight size={14} />
+                          View Detail <ArrowRight size={14} />
                         </button>
                       </div>
                     </div>
