@@ -216,13 +216,6 @@
   overflow: hidden;
 }
 
-.app-feat-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
 .app-feat-cta {
   display: inline-flex;
   align-items: center;
@@ -242,28 +235,6 @@
   transform: translateX(3px);
 }
 
-.app-feat-detail-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 7px 16px 7px 18px;
-  border-radius: 100px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  font-family: inherit;
-  letter-spacing: 0.01em;
-  background: #fff;
-  color: var(--btn-color, #5DAE7B);
-  border: 1.5px solid var(--btn-color, #5DAE7B);
-  cursor: pointer;
-  transition: background 0.18s ease, color 0.18s ease, gap 0.18s ease;
-}
-
-.app-feat-card:hover .app-feat-detail-btn {
-  background: var(--btn-color, #5DAE7B);
-  color: #fff;
-  gap: 10px;
-}
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
