@@ -521,7 +521,7 @@ const ProductsPage = () => {
 
                         <button
                           className="pp-fc-view-btn"
-                          style={{ color: cat.color }}
+                          style={{ '--btn-color': cat.color }}
                           onClick={e => { e.stopPropagation(); openModal(family, cat); }}
                         >
                           View Detail <ArrowRight size={13} />
