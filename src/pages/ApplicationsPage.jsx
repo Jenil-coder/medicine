@@ -68,7 +68,8 @@ const QuoteCartPanel = ({ cart, onUpdateQty, onRemove, onClose, onSubmit }) => {
 // ── Main Page Component ──
 const ApplicationsPage = () => {
   const [activeSection, setActiveSection] = useState(applicationsData[0].id);
-  const sidebarItemRefs = useRef({});
+  const sidebarListRef = useRef(null);
+  const sidebarItemsRef = useRef(new Map());
   const [selectedWorkflow, setSelectedWorkflow] = useState(null);
   const [quoteCart, setQuoteCart] = useState([]);
   const [quantities, setQuantities] = useState({});
@@ -78,21 +79,40 @@ const ApplicationsPage = () => {
   const [askEmail, setAskEmail] = useState('');
   const [askMessage, setAskMessage] = useState('');
 
+  /* ── Scroll-spy via IntersectionObserver ── */
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
-      let currentSection = applicationsData[0].id;
-      for (const app of applicationsData) {
-        const element = document.getElementById(app.id);
-        if (element && scrollPosition >= element.offsetTop) {
-          currentSection = app.id;
-        }
-      }
-      setActiveSection(currentSection);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter(e => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible.length > 0) setActiveSection(visible[0].target.id);
+      },
+      { rootMargin: '-80px 0px -50% 0px', threshold: 0 }
+    );
+    applicationsData.forEach(app => {
+      const el = document.getElementById(app.id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
   }, []);
+
+  /* ── Auto-scroll sidebar so active item stays visible ── */
+  useEffect(() => {
+    const list = sidebarListRef.current;
+    const item = sidebarItemsRef.current.get(activeSection);
+    if (!list || !item) return;
+    const listTop = list.scrollTop;
+    const listBottom = listTop + list.clientHeight;
+    const itemTop = item.offsetTop;
+    const itemBottom = itemTop + item.offsetHeight;
+    if (itemTop < listTop + 24 || itemBottom > listBottom - 24) {
+      list.scrollTo({
+        top: itemTop - list.clientHeight / 2 + item.offsetHeight / 2,
+        behavior: 'smooth',
+      });
+    }
+  }, [activeSection]);
 
   useEffect(() => {
     document.body.style.overflow = (selectedWorkflow || showCart) ? 'hidden' : 'unset';
@@ -102,11 +122,6 @@ const ApplicationsPage = () => {
   useEffect(() => {
     if (selectedWorkflow) { setAskName(''); setAskEmail(''); setAskMessage(''); }
   }, [selectedWorkflow]);
-
-  useEffect(() => {
-    const el = sidebarItemRefs.current[activeSection];
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }, [activeSection]);
 
   const scrollToSection = (e, id) => {
     e.preventDefault();
@@ -163,19 +178,25 @@ const ApplicationsPage = () => {
         <aside className="corp-sidebar">
           <nav className="corp-sidebar-nav">
             <h3 className="corp-sidebar-title">Applications</h3>
-            <ul>
+            <ul ref={sidebarListRef}>
               {applicationsData.map(app => {
                 const Icon = app.icon;
+                const isActive = activeSection === app.id;
                 return (
-                  <li key={app.id}>
+                  <li
+                    key={app.id}
+                    ref={el => {
+                      if (el) sidebarItemsRef.current.set(app.id, el);
+                      else sidebarItemsRef.current.delete(app.id);
+                    }}
+                  >
                     <a
                       href={`#${app.id}`}
-                      ref={el => sidebarItemRefs.current[app.id] = el}
-                      className={activeSection === app.id ? 'active' : ''}
+                      className={isActive ? 'active' : ''}
                       onClick={(e) => scrollToSection(e, app.id)}
-                      style={activeSection === app.id ? { '--active-color': app.color } : {}}
+                      style={isActive ? { '--active-color': app.color } : {}}
                     >
-                      <span className="corp-sidebar-icon"><Icon size={18} /></span>
+                      <span className="corp-sidebar-icon"><Icon size={16} /></span>
                       <span className="corp-sidebar-text">{app.title}</span>
                     </a>
                   </li>
