@@ -183,10 +183,10 @@ const ApplicationDetailPage = () => {
                     <p className="adp-wf-desc">{wf.description}</p>
                     <button
                       className="adp-wf-view-btn"
-                      style={{ color: app.color }}
+                      style={{ '--btn-color': app.color }}
                       onClick={() => setSelectedWorkflow({ ...wf, appColor: app.color, appCategory: app.title })}
                     >
-                      View Specifications <ArrowRight size={14} />
+                      View Detail <ArrowRight size={14} />
                     </button>
                   </div>
                 </div>
