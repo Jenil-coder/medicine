@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -322,19 +322,46 @@ const ProductsPage = () => {
   const [selectedFamily, setSelectedFamily] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
+  const sidebarListRef = useRef(null);
+  const sidebarItemsRef = useRef(new Map());
+
+  /* ── Scroll-spy via IntersectionObserver ── */
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 220;
-      let current = productsData[0].id;
-      for (const cat of productsData) {
-        const el = document.getElementById(`cat-${cat.id}`);
-        if (el && scrollPosition >= el.offsetTop) current = cat.id;
-      }
-      setActiveSection(current);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter(e => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible.length > 0) {
+          const id = visible[0].target.id.replace('cat-', '');
+          setActiveSection(id);
+        }
+      },
+      { rootMargin: '-80px 0px -50% 0px', threshold: 0 }
+    );
+    productsData.forEach(cat => {
+      const el = document.getElementById(`cat-${cat.id}`);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
   }, []);
+
+  /* ── Auto-scroll sidebar so active item stays visible ── */
+  useEffect(() => {
+    const list = sidebarListRef.current;
+    const item = sidebarItemsRef.current.get(activeSection);
+    if (!list || !item) return;
+    const listTop = list.scrollTop;
+    const listBottom = listTop + list.clientHeight;
+    const itemTop = item.offsetTop;
+    const itemBottom = itemTop + item.offsetHeight;
+    if (itemTop < listTop + 24 || itemBottom > listBottom - 24) {
+      list.scrollTo({
+        top: itemTop - list.clientHeight / 2 + item.offsetHeight / 2,
+        behavior: 'smooth',
+      });
+    }
+  }, [activeSection]);
 
   useEffect(() => {
     const anyOverlay = showCart || selectedFamily;
@@ -410,12 +437,18 @@ const ProductsPage = () => {
         <aside className="pp-sidebar">
           <nav className="pp-sidebar-nav">
             <h3 className="pp-sidebar-title">Products</h3>
-            <ul>
+            <ul ref={sidebarListRef}>
               {productsData.map(cat => {
                 const Icon = cat.icon;
                 const isActive = activeSection === cat.id;
                 return (
-                  <li key={cat.id}>
+                  <li
+                    key={cat.id}
+                    ref={el => {
+                      if (el) sidebarItemsRef.current.set(cat.id, el);
+                      else sidebarItemsRef.current.delete(cat.id);
+                    }}
+                  >
                     <a
                       href={`#cat-${cat.id}`}
                       className={isActive ? 'active' : ''}
