@@ -59,8 +59,9 @@ const Services = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <p style={{ marginBottom: '1.5rem', opacity: 0.7 }}>Our dedicated Service Division operates as an independent profit center. We believe that excellent service is key to long-term partnerships — from preventive maintenance to our in-house calibration and training centers.</p>
-          <Link to="/services" className="pb-explore-btn" style={{ background: '#fff', color: '#000', display: 'inline-flex', padding: '12px 24px', borderRadius: '30px', fontWeight: 600, textDecoration: 'none', alignItems: 'center', gap: '8px' }}>
-            Explore All Services <ArrowRight size={18} />
+          <Link to="/services" className="services-explore-btn">
+            <span>Explore All Services</span>
+            <ArrowRight size={18} />
           </Link>
         </motion.div>
       </div>
