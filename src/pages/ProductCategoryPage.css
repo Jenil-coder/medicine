@@ -903,13 +903,14 @@
   margin: 4px 8px 10px;
   padding: 10px;
   background: transparent;
-  border: 1.5px solid;
+  color: var(--cat-color);
+  border: 1.5px solid var(--cat-color);
   border-radius: 10px;
   font-size: 0.82rem;
   font-weight: 700;
   cursor: pointer;
   font-family: inherit;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .pcp-qb-view-quote:hover {

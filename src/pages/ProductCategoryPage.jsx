@@ -238,7 +238,7 @@ const FamilyModal = ({ family, category, quoteCart, quantities, addedItem, onClo
                 {quoteCart.length > 0 && (
                   <button
                     className="pcp-qb-view-quote"
-                    style={{ borderColor: category.color, color: category.color, '--cat-color': category.color }}
+                    style={{ '--cat-color': category.color }}
                     onClick={() => { onClose(); onViewCart(); }}
                   >
                     <ShoppingCart size={14} />
