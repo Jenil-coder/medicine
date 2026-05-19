@@ -57,9 +57,14 @@ const Applications = () => {
                       <h3 className="app-feat-title">{item.title}</h3>
                       <p className="app-feat-overview">{item.overview}</p>
                     </div>
-                    <span className="app-feat-cta" style={{ background: item.color }}>
-                      Explore <ArrowRight size={14} />
-                    </span>
+                    <div className="app-feat-actions">
+                      <span className="app-feat-cta" style={{ background: item.color }}>
+                        Explore <ArrowRight size={14} />
+                      </span>
+                      <span className="app-feat-detail-btn" style={{ '--btn-color': item.color }}>
+                        View Detail <ArrowRight size={14} />
+                      </span>
+                    </div>
                   </div>
 
                 </Link>
